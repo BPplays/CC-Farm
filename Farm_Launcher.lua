@@ -54,7 +54,7 @@ end
 local loadedgitlib = 0
 while loadedgitlib ~= 1 do
     if os.loadAPI("AndysPrograms/api/git/git") then
-        --print("loaded gui lib")
+        print("loaded git lib")
         loadedgitlib = 1
     else
         print(" NOTloaded git lib")
