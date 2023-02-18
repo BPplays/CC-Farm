@@ -1,10 +1,26 @@
-local update_name = "updateV5"
+local update_name = "updateV7"
 
 
 local git_url = "WPg3HSiU"
 local gui_url = "4W4TKHmM"
 local farm_url = "WSZF4MYJ"
 local goto_url = "PX672x3m"
+local launcherargs = {...}
+
+
+if launcherargs[1] == "-dev_enable" then
+    fs.makeDir("AndysPrograms/farm/dev_mode")
+elseif launcherargs[1] == "-dev_disable" then
+    fs.delete("AndysPrograms/farm/dev_mode")
+end
+_G.farm_devmode = false
+if fs.exists "AndysPrograms/farm/dev_mode" then
+    local farm_update = {"BPplays","CC-Farm","dev","farm.lua","farm","AndysPrograms/farm"}
+    _G.farm_devmode = true
+else
+    local farm_update = {"BPplays","CC-Farm","main","farm.lua","farm","AndysPrograms/farm"}
+    _G.farm_devmode = false
+end
 if fs.exists("AndysPrograms/api/git/git") == false then
     fs.makeDir("AndysPrograms/api/git")
     shell.run("cd","AndysPrograms/api/git")
@@ -28,7 +44,7 @@ if fs.exists("AndysPrograms/api/pastebin_silent/ps") == false then
     shell.run("cd","..")
 end
 
-launcherargs = {...}
+
 local farm_prog_progress = "init"
 while loadedguilib ~= 1 do
     if os.loadAPI("AndysPrograms/api/gui/gui") then
