@@ -51,7 +51,7 @@ while loadedgitlib ~= 1 do
         --print("loaded gui lib")
         loadedgitlib = 1
     else
-        print(" NOTloaded gui lib")
+        print(" NOTloaded git lib")
     end
 end
 
@@ -62,7 +62,7 @@ if fs.exists(run_update) == false then
     shell.run("cd","//")
 end
 if fs.exists(load_update.."/".."ud") == false then
-    git.git(update_url)
+    git.get(update_url)
 end
 shell.run(run_update, "gui", gui_url, "AndysPrograms/api/gui", "none", "none")
 -- if fs.exists("AndysPrograms/api/pastebin_silent/ps") == false then
