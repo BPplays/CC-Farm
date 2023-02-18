@@ -155,13 +155,13 @@ function error_handler(err)
 end
 
 
-local function ud()
+local function update_farm()
     -- shell.run(run_update, goto_update)
     ud.update(goto_update)
     -- shell.run(run_update, farm_update)
     ud.update(farm_update)
 end
-ud()
+update_farm()
 
 
 
@@ -206,12 +206,12 @@ function update_start_farm()
                 end
                 
                 if xpcall(para_farm,error_handler) then
-                    ud()
+                    update_farm()
                 else
                     -- sleep(2)
                     sleep(0)
                     errhnd = 0
-                    ud()
+                    update_farm()
                 end
 
                 
