@@ -69,16 +69,16 @@ if fs.exists(run_update) == false then
 end
 if fs.exists(run_update) == false then
     local i = 1
-    while fs.exists(run_update) == false and i < 12 do
-        fs.makeDir(load_update)
-        git.get(update_url)
+    -- while fs.exists(run_update) == false and i < 12 do
+    fs.makeDir(load_update)
+    git.get(update_url)
         -- shell.run("git","get",update_url[1],update_url[2],update_url[3],update_url[4],update_url[5])
-        print(table.concat(update_url,", "))
-        if i > 10 then
-            sleep(1)
-        elseif i > 12 then
-            break 
-        end
+        -- print(table.concat(update_url,", "))
+        -- if i > 10 then
+        --     sleep(1)
+        -- elseif i > 12 then
+        --     break 
+        -- end
     end
 end
 -- shell.run(run_update, "gui", gui_url, "AndysPrograms/api/gui", "none", "none")
