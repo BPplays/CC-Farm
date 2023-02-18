@@ -161,7 +161,9 @@ local function update_farm()
     -- shell.run(run_update, farm_update)
     ud.update(farm_update)
 end
+print("farm update start")
 update_farm()
+print("farm update end")
 
 
 
@@ -260,7 +262,7 @@ while _G.stopfarm ~= 1 do
         _G.andy_farm_program_running = 1
     end
 
-
+    print("start")
     start_para_lau()
     stopfarm = 1
     --parallel.waitForAny(farm_gui_lau, start_farm_lau)
