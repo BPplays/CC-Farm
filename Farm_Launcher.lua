@@ -73,6 +73,7 @@ end
 
 -- shell.run(run_update, gui_update)
 os.loadAPI(run_update)
+ud.update(gui_update)
 
 -- if fs.exists("AndysPrograms/api/pastebin_silent/ps") == false then
 --     fs.makeDir("AndysPrograms/api/pastebin_silent")
