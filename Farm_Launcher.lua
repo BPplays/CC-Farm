@@ -1,4 +1,4 @@
-local update_name = "updateV7"
+local update_name = "updateV7.1"
 
 
 local git_url = "WPg3HSiU"
@@ -66,11 +66,14 @@ if fs.exists(run_update) == false then
     shell.run("pastebin","get","uBa2UnVT","ud")
     shell.run("cd","//")
 end
-if fs.exists(load_update.."/".."ud") == false then
+if fs.exists(run_update) == false then
     git.get(update_url)
 end
 -- shell.run(run_update, "gui", gui_url, "AndysPrograms/api/gui", "none", "none")
-shell.run(run_update, gui_update)
+
+-- shell.run(run_update, gui_update)
+os.loadAPI(run_update)
+
 -- if fs.exists("AndysPrograms/api/pastebin_silent/ps") == false then
 --     fs.makeDir("AndysPrograms/api/pastebin_silent")
 --     shell.run("cd","AndysPrograms/api/pastebin_silent")
@@ -136,8 +139,10 @@ end
 
 
 local function ud()
-    shell.run(run_update, goto_update)
-    shell.run(run_update, farm_update)
+    -- shell.run(run_update, goto_update)
+    ud.update(goto_update)
+    -- shell.run(run_update, farm_update)
+    ud.update(farm_update)
 end
 ud()
 
