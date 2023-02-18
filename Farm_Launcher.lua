@@ -71,7 +71,9 @@ if fs.exists(run_update) == false then
     local i = 1
     -- while fs.exists(run_update) == false and i < 12 do
     fs.makeDir(load_update)
+    print("get ud start")
     git.get(update_url)
+    print("get ud end")
         -- shell.run("git","get",update_url[1],update_url[2],update_url[3],update_url[4],update_url[5])
         -- print(table.concat(update_url,", "))
         -- if i > 10 then
@@ -85,7 +87,9 @@ end
 
 -- shell.run(run_update, gui_update)
 os.loadAPI(run_update)
+print("gui ud start")
 ud.update(gui_update)
+print("gui ud end")
 
 -- if fs.exists("AndysPrograms/api/pastebin_silent/ps") == false then
 --     fs.makeDir("AndysPrograms/api/pastebin_silent")
