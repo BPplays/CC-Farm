@@ -79,7 +79,7 @@ if fs.exists(run_update) == false then
         -- elseif i > 12 then
         --     break 
         -- end
-    end
+    -- end
 end
 -- shell.run(run_update, "gui", gui_url, "AndysPrograms/api/gui", "none", "none")
 
