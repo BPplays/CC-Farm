@@ -6,7 +6,7 @@ local gui_url = "4W4TKHmM"
 local farm_url = "WSZF4MYJ"
 local goto_url = "PX672x3m"
 local launcherargs = {...}
-local load_update = "AndysPrograms/api"..update_name
+local load_update = "AndysPrograms/api".."/"..update_name
 local run_update = load_update.."/".."ud"
 
 
@@ -25,13 +25,13 @@ end
 
 _G.farm_devmode = false
 if fs.exists "AndysPrograms/farm/dev_mode" then
-    update_url = {"BPplays","CC-Update","dev","update.lua","ud",tostring("AndysPrograms/api".."/"..update_name)}
+    update_url = {"BPplays","CC-Update","dev","update.lua","ud",tostring("AndysPrograms/api"..load_update)}
     goto_update = {"BPplays","CC-Goto","dev","goto.lua","gt","AAndysPrograms/api"}
     gui_update = {"BPplays","CC-Farm","dev","lib/Farm_GUI.lua","gui","AndysPrograms/api/gui"}
     farm_update = {"BPplays","CC-Farm","dev","farm.lua","farm","AndysPrograms/farm"}
     _G.farm_devmode = true
 else
-    update_url = {"BPplays","CC-Update","main","update.lua","ud",tostring("AndysPrograms/api".."/"..update_name)}
+    update_url = {"BPplays","CC-Update","main","update.lua","ud",tostring("AndysPrograms/api"..load_update)}
     goto_update = {"BPplays","CC-Goto","main","goto.lua","gt","AAndysPrograms/api"}
     gui_update = {"BPplays","CC-Farm","main","lib/Farm_GUI.lua","gui","AndysPrograms/api/gui"}
     farm_update = {"BPplays","CC-Farm","main","farm.lua","farm","AndysPrograms/farm"}
@@ -68,6 +68,7 @@ if fs.exists(run_update) == false then
     shell.run("cd","//")
 end
 if fs.exists(run_update) == false then
+    fs.makeDir(load_update)
     git.get(update_url)
 end
 -- shell.run(run_update, "gui", gui_url, "AndysPrograms/api/gui", "none", "none")
