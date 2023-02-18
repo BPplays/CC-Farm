@@ -33,6 +33,7 @@ else
     farm_update = {"BPplays","CC-Farm","main","farm.lua","farm","AndysPrograms/farm"}
     _G.farm_devmode = false
 end
+
 if fs.exists("AndysPrograms/api/git/git") == false then
     fs.makeDir("AndysPrograms/api/git")
     shell.run("cd","AndysPrograms/api/git")
@@ -45,6 +46,7 @@ if fs.exists("AndysPrograms/api/git/git") == false then
     shell.run("git","get","BPplays","CC-git-api","main","git","git")
     shell.run("cd ","//")
 end
+
 local loadedgitlib = 0
 while loadedgitlib ~= 1 do
     if os.loadAPI("AndysPrograms/api/git/git") then
