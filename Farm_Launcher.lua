@@ -22,15 +22,16 @@ if launcherargs[1] == "-dev_enable" then
 elseif launcherargs[1] == "-dev_disable" then
     fs.delete("AndysPrograms/farm/dev_mode")
 end
+
 _G.farm_devmode = false
 if fs.exists "AndysPrograms/farm/dev_mode" then
-    update_url = {"BPplays","CC-Update","dev","update.lua","ud","AndysPrograms/api".."/"..update_name}
+    update_url = {"BPplays","CC-Update","dev","update.lua","ud",tostring("AndysPrograms/api".."/"..update_name)}
     goto_update = {"BPplays","CC-Goto","dev","goto.lua","gt","AAndysPrograms/api"}
     gui_update = {"BPplays","CC-Farm","dev","lib/Farm_GUI.lua","gui","AndysPrograms/api/gui"}
     farm_update = {"BPplays","CC-Farm","dev","farm.lua","farm","AndysPrograms/farm"}
     _G.farm_devmode = true
 else
-    update_url = {"BPplays","CC-Update","main","update.lua","ud","AndysPrograms/api".."/"..update_name}
+    update_url = {"BPplays","CC-Update","main","update.lua","ud",tostring("AndysPrograms/api".."/"..update_name)}
     goto_update = {"BPplays","CC-Goto","main","goto.lua","gt","AAndysPrograms/api"}
     gui_update = {"BPplays","CC-Farm","main","lib/Farm_GUI.lua","gui","AndysPrograms/api/gui"}
     farm_update = {"BPplays","CC-Farm","main","farm.lua","farm","AndysPrograms/farm"}
