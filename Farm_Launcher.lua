@@ -6,8 +6,16 @@ local gui_url = "4W4TKHmM"
 local farm_url = "WSZF4MYJ"
 local goto_url = "PX672x3m"
 local launcherargs = {...}
+local load_update = "AndysPrograms/api"..update_name
+local run_update = load_update.."/".."ud"
 
 
+
+
+
+local update_url = {}
+local goto_update = {}
+local farm_update = {}
 if launcherargs[1] == "-dev_enable" then
     fs.makeDir("AndysPrograms/farm/dev_mode")
 elseif launcherargs[1] == "-dev_disable" then
@@ -15,10 +23,14 @@ elseif launcherargs[1] == "-dev_disable" then
 end
 _G.farm_devmode = false
 if fs.exists "AndysPrograms/farm/dev_mode" then
-    local farm_update = {"BPplays","CC-Farm","dev","farm.lua","farm","AndysPrograms/farm"}
+    update_url = {"BPplays","CC-Update","dev","update.lua","ud","AndysPrograms/api"..update_name}
+    goto_update = {"BPplays","CC-Goto","dev","goto.lua","gt","AAndysPrograms/api"}
+    farm_update = {"BPplays","CC-Farm","dev","farm.lua","farm","AndysPrograms/farm"}
     _G.farm_devmode = true
 else
-    local farm_update = {"BPplays","CC-Farm","main","farm.lua","farm","AndysPrograms/farm"}
+    update_url = {"BPplays","CC-Update","main","update.lua","ud","AndysPrograms/api"..update_name}
+    goto_update = {"BPplays","CC-Goto","main","goto.lua","gt","AAndysPrograms/api"}
+    farm_update = {"BPplays","CC-Farm","main","farm.lua","farm","AndysPrograms/farm"}
     _G.farm_devmode = false
 end
 if fs.exists("AndysPrograms/api/git/git") == false then
@@ -33,23 +45,26 @@ if fs.exists("AndysPrograms/api/git/git") == false then
     shell.run("git","get","BPplays","CC-git-api","main","git","git")
     shell.run("cd ","//")
 end
+os.loadAPI("AndysPrograms/api/git/git")
 
-if fs.exists("AndysPrograms/api"..update_name) == false then
-    fs.makeDir("AndysPrograms/api")
-    shell.run("cd","AndysPrograms/api")
-    shell.run("pastebin","get","uBa2UnVT",update_name)
-    shell.run("cd","..")
-    shell.run("cd","..")
+if fs.exists(run_update) == false then
+    fs.makeDir(load_update)
+    shell.run("cd",load_update)
+    shell.run("pastebin","get","uBa2UnVT","ud")
+    shell.run("cd","//")
 end
-shell.run("AndysPrograms/api/"..update_name, "gui", gui_url, "AndysPrograms/api/gui", "none", "none")
-if fs.exists("AndysPrograms/api/pastebin_silent/ps") == false then
-    fs.makeDir("AndysPrograms/api/pastebin_silent")
-    shell.run("cd","AndysPrograms/api/pastebin_silent")
-    shell.run("pastebin","get","Zp2CC5qM","ps")
-    shell.run("cd","..")
-    shell.run("cd","..")
-    shell.run("cd","..")
+if fs.exists(load_update.."/".."ud") == false then
+    git.git(update_url)
 end
+shell.run(run_update, "gui", gui_url, "AndysPrograms/api/gui", "none", "none")
+-- if fs.exists("AndysPrograms/api/pastebin_silent/ps") == false then
+--     fs.makeDir("AndysPrograms/api/pastebin_silent")
+--     shell.run("cd","AndysPrograms/api/pastebin_silent")
+--     shell.run("pastebin","get","Zp2CC5qM","ps")
+--     shell.run("cd","..")
+--     shell.run("cd","..")
+--     shell.run("cd","..")
+-- end
 
 
 local farm_prog_progress = "init"
@@ -107,8 +122,8 @@ end
 
 
 local function ud()
-    shell.run("AndysPrograms/api/"..update_name, "gt", goto_url, "AndysPrograms/api", "none", "none")
-    shell.run("AndysPrograms/api/"..update_name, "farm", farm_url, "AndysPrograms/farm", "none", "no", unpack(launcherargs))
+    shell.run(run_update, goto_update)
+    shell.run(run_update, farm_update)
 end
 ud()
 
