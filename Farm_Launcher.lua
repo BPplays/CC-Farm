@@ -27,6 +27,13 @@ if fs.exists("AndysPrograms/api/git/git") == false then
     shell.run("pastebin","get","WPg3HSiU","git")
     shell.run("cd ","//")
 end
+if fs.exists("AndysPrograms/api/git/git") == false then
+    fs.makeDir("AndysPrograms/api/git")
+    shell.run("cd","AndysPrograms/api/git")
+    shell.run("git","get","BPplays","CC-git-api","main","git","git")
+    shell.run("cd ","//")
+end
+
 if fs.exists("AndysPrograms/api"..update_name) == false then
     fs.makeDir("AndysPrograms/api")
     shell.run("cd","AndysPrograms/api")
