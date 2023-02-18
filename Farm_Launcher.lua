@@ -45,7 +45,15 @@ if fs.exists("AndysPrograms/api/git/git") == false then
     shell.run("git","get","BPplays","CC-git-api","main","git","git")
     shell.run("cd ","//")
 end
-os.loadAPI("AndysPrograms/api/git/git")
+local loadedgitlib = 0
+while loadedgitlib ~= 1 do
+    if os.loadAPI("AndysPrograms/api/git/git") then
+        --print("loaded gui lib")
+        loadedgitlib = 1
+    else
+        print(" NOTloaded gui lib")
+    end
+end
 
 if fs.exists(run_update) == false then
     fs.makeDir(load_update)
