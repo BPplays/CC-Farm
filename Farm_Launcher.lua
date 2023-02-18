@@ -68,8 +68,18 @@ if fs.exists(run_update) == false then
     shell.run("cd","//")
 end
 if fs.exists(run_update) == false then
-    fs.makeDir(load_update)
-    git.get(update_url)
+    local i = 1
+    while fs.exists(run_update) == false do
+        fs.makeDir(load_update)
+        -- git.get(update_url)
+        shell.run("git","get",update_url[1],update_url[2],update_url[3],update_url[4],update_url[5])
+        print(table.concat(update_url,", "))
+        if i > 10 then
+            sleep(1)
+        elseif i > 2 then
+            break 
+        end
+    end
 end
 -- shell.run(run_update, "gui", gui_url, "AndysPrograms/api/gui", "none", "none")
 
