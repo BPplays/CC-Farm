@@ -15,6 +15,7 @@ local run_update = load_update.."/".."ud"
 
 local update_url = {}
 local goto_update = {}
+local gui_update = {}
 local farm_update = {}
 if launcherargs[1] == "-dev_enable" then
     fs.makeDir("AndysPrograms/farm/dev_mode")
@@ -25,11 +26,13 @@ _G.farm_devmode = false
 if fs.exists "AndysPrograms/farm/dev_mode" then
     update_url = {"BPplays","CC-Update","dev","update.lua","ud","AndysPrograms/api"..update_name}
     goto_update = {"BPplays","CC-Goto","dev","goto.lua","gt","AAndysPrograms/api"}
+    gui_update = {"BPplays","CC-Farm","dev","lib/Farm_GUI.lua","gui","AndysPrograms/api/gui"}
     farm_update = {"BPplays","CC-Farm","dev","farm.lua","farm","AndysPrograms/farm"}
     _G.farm_devmode = true
 else
     update_url = {"BPplays","CC-Update","main","update.lua","ud","AndysPrograms/api"..update_name}
     goto_update = {"BPplays","CC-Goto","main","goto.lua","gt","AAndysPrograms/api"}
+    gui_update = {"BPplays","CC-Farm","main","lib/Farm_GUI.lua","gui","AndysPrograms/api/gui"}
     farm_update = {"BPplays","CC-Farm","main","farm.lua","farm","AndysPrograms/farm"}
     _G.farm_devmode = false
 end
@@ -66,7 +69,8 @@ end
 if fs.exists(load_update.."/".."ud") == false then
     git.get(update_url)
 end
-shell.run(run_update, "gui", gui_url, "AndysPrograms/api/gui", "none", "none")
+-- shell.run(run_update, "gui", gui_url, "AndysPrograms/api/gui", "none", "none")
+shell.run(run_update, gui_update)
 -- if fs.exists("AndysPrograms/api/pastebin_silent/ps") == false then
 --     fs.makeDir("AndysPrograms/api/pastebin_silent")
 --     shell.run("cd","AndysPrograms/api/pastebin_silent")
