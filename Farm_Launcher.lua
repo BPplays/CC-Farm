@@ -28,7 +28,7 @@ if fs.exists "AndysPrograms/farm/dev_mode" then
     update_url = {"BPplays","CC-Update","dev","Update.lua","ud",tostring(load_update)}
     goto_update = {"BPplays","CC-Goto","dev","goto.lua","gt","AndysPrograms/api"}
     gui_update = {"BPplays","CC-Farm","dev","lib/Farm_GUI.lua","gui","AndysPrograms/api/gui"}
-    farm_update = {"BPplays","CC-Farm","dev","Farm_lib.lua","farm","AndysPrograms/farm"}
+    farm_update = {"BPplays","CC-Farm","dev","lib/Farm_lib.lua","farm","AndysPrograms/farm"}
     _G.farm_devmode = true
 else
     update_url = {"BPplays","CC-Update","main","Update.lua","ud",tostring(load_update)}
