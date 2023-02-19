@@ -189,7 +189,7 @@ function startfarm(funfarmargs)
             if turnleftchest == 1 then
                 turtle.turnLeft()
             end
-
+            farm_rescan = true
             farmexit = 1
         end
 
@@ -198,14 +198,14 @@ function startfarm(funfarmargs)
             if width >= 2 then
                 if right == 1 then
                     turtle.turnRight()
-                    turtle.forward()
+                    farm_move_foward()
                     turtle.turnRight()
                     dist = sub_lenth
                     width = width - 1
                     right = 0
                 else
                     turtle.turnLeft()
-                    turtle.forward()
+                    farm_move_foward()
                     turtle.turnLeft()
                     dist = sub_lenth
                     width = width - 1
@@ -243,6 +243,7 @@ function startfarm(funfarmargs)
                     working_forward_recenter_times = working_forward_recenter_times - 1
                 end
             end
+            farm_rescan = true
         end
 
         if percentageold == nil then
