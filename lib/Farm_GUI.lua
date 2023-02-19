@@ -441,7 +441,7 @@ function start_farm_gui(args)
                         selitem = selitem + 1
                     end
                 elseif match_list(key,con_back) then
-                    
+                    menu_back()
                 elseif match_list(key,con_quick_quit) then
                     exit()
                 end
