@@ -9,7 +9,7 @@ function start_farm_gui(args)
 	-- 	andy_farm_program_running = 1
 	-- end
 
-
+    selitem = 1
     --input lists
     con_up = {"keys.up","keys.w"}
     con_down = {"keys.down","keys.s"}
@@ -21,7 +21,7 @@ function start_farm_gui(args)
 
 
 
-    function match_list(var,list)
+    local function match_list(var,list)
         for i = 1,#list do
             if var == list[i] then
                 return true
@@ -417,26 +417,28 @@ function start_farm_gui(args)
             end
 
             function onkeypress(key, menu, selected)
-                if key == keys.enter or key == keys.space then
+                if match_list(key,con_select) then
                     if chngsel == 0 then
                         onsel(menu, selected)
                     end
                 -- if chngsel == 1 and (key == keys.enter or key == keys.space) then
                     --   chngsel = 0
                 -- end
-                elseif key == keys.up or key == keys.w then
+                elseif match_list(key,con_up) then
                     if selitem > 1 then
                         --setsoffset = setsoffset + 2.1
                         setsoffset = math.floor(setsoffset)
                         selitem = selitem - 1
                     end
-                elseif key == keys.down or key == keys.s then
+                elseif match_list(key,con_down) then
                     if selitem < (#menu) then
                         --setsoffset = setsoffset - 1.9
                         setsoffset = math.floor(setsoffset)
                         selitem = selitem + 1
                     end
-                elseif key == keys.q then
+                elseif match_list(key,con_back) then
+                    
+                elseif match_list(key,con_quick_quit) then
                     exit()
                 end
             end
