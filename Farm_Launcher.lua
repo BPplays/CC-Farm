@@ -88,7 +88,9 @@ end
 -- shell.run(run_update, gui_update)
 os.loadAPI(run_update)
 print("gui ud start")
-ud.update(gui_update)
+local function update_gui_para()
+    ud.update(gui_update)
+end
 print("gui ud end")
 
 -- if fs.exists("AndysPrograms/api/pastebin_silent/ps") == false then
@@ -169,7 +171,8 @@ local function update_farm()
     parallel.waitForAll(update_farm_api,update_goto)
 end
 print("farm update start")
-update_farm()
+parallel.waitForAll(update_farm,update_gui_para)
+-- update_farm()
 print("farm update end")
 
 
