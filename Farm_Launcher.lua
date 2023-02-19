@@ -168,10 +168,13 @@ local function update_farm()
     -- shell.run(run_update, goto_update)
     
     -- shell.run(run_update, farm_update)
-    parallel.waitForAll(update_farm_api,update_goto)
+    -- parallel.waitForAll(update_farm_api,update_goto)
+    ud.update(goto_update)
+    ud.update(farm_update)
 end
 print("farm update start")
-parallel.waitForAll(update_farm,update_gui_para)
+-- parallel.waitForAll(update_farm,update_gui_para)
+update_gui_para()
 -- update_farm()
 print("farm update end")
 
