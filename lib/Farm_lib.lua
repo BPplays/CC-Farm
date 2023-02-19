@@ -8,6 +8,8 @@ function startfarm(funfarmargs)
         farm_prog_progress = farm_prog_progress + 1
         farmapiloadedguilib = 0                         
         
+        local farm_rescan = true
+
         os.loadAPI("AndysPrograms/api/gt")  
         while farmapiloadedguilib ~= 1 do
             if os.loadAPI("AndysPrograms/api/gui/gui") then
@@ -98,6 +100,11 @@ function startfarm(funfarmargs)
         farm_prog_progress = farm_prog_progress + 1
 
 
+
+        local function farm_move_foward()
+            turtle.forward()
+            farm_rescan = true
+        end
 
         function scrlnum(a,b,st,cl)
             if a == b then
@@ -258,52 +265,54 @@ function startfarm(funfarmargs)
             elseif totalstages >= 2 then
                 --print ("Stage: " .. done .. "/" .. totalsteps.. " Harvest and Plant")
             end
-            for i=1,#crop_name do
-                success, data = turtle.inspectDown()
-                if success then
-                    if dopnt == 6 then
-                    if data.state.age ~= nil then
-                        scnmpnt = 0
-                        dlprns1 = 0
-                        percentagefloat = (data.state.age - 0) / (7 - 0) * 100
-                        percentage = math.floor(percentagefloat+0.5)
-                        scnmtmst = os.clock()
+            -- for i=1,#crop_name do
+            success, data = turtle.inspectDown()
+            if success then
+                if dopnt == 6 then
+                if data.state.age ~= nil then
+                    scnmpnt = 0
+                    dlprns1 = 0
+                    percentagefloat = (data.state.age - 0) / (7 - 0) * 100
+                    percentage = math.floor(percentagefloat+0.5)
+                    scnmtmst = os.clock()
 
-                        scagl = 0
-                        while dlprns1 < 1 do
-                            scagtmst = os.clock()
-                            --scnmpnt, dlprns1 = scrlnum(percentageold,percentage,tnstm,scnmtmst)
-                            scnmpnt = 1
-                            if dlprns1 == nil then
-                                dlprns1 = 0
-                            end
+                    scagl = 0
+                    while dlprns1 < 1 do
+                        scagtmst = os.clock()
+                        --scnmpnt, dlprns1 = scrlnum(percentageold,percentage,tnstm,scnmtmst)
+                        scnmpnt = 1
+                        if dlprns1 == nil then
+                            dlprns1 = 0
+                        end
 
-                            if scagl > 25 then
-                                sleep()
-                                scagl = 0
-                            end
-                            scagl = scagl + 1
-                            scagtmen = os.clock()
-                            scagtm = scagtmen - scagtmst
-                            end
-                        percentageold = percentage
-                        
-                        
-                    end
-                    end
+                        if scagl > 25 then
+                            sleep()
+                            scagl = 0
+                        end
+                        scagl = scagl + 1
+                        scagtmen = os.clock()
+                        scagtm = scagtmen - scagtmst
+                        end
+                    percentageold = percentage
+                    
+                    
+                end
+                end
+                for i=1,#crop_name do
                     if (data.name == crop_name[i]) or (sortblock == 0) then
                         if data.state.age == crop_max_age or ignore_nil_age == 1 then
                             turtle.digDown()
- 
+
 
                         end 
                     end 
-                    turtle.suckDown()
-                    if Mode == 1 then
-                        turtle.placeDown()
-                    end
+                end
+                turtle.suckDown()
+                if Mode == 1 then
+                    turtle.placeDown()
                 end
             end
+            -- end
             ttmen = os.clock()
             tnstm = ttmen - ttmst
             tnstm = tnstm - scagtm
@@ -311,6 +320,7 @@ function startfarm(funfarmargs)
             if tnstm < 0 then
                 tnstm = 0.02
             end
+            farm_rescan = false
         end
 
         function scrlage()
@@ -357,12 +367,18 @@ function startfarm(funfarmargs)
                 while width ~= 0 do
                     while dist ~= 0 do
                         dopnt = 1
-                        parallel.waitForAll(stage1,scrlage)
+                        -- parallel.waitForAll(stage1,scrlage)
+                        if farm_rescan then
+                            stage1()
+                        end
                         --stage1()
                         dopnt = 1
                         turtle.forward()
                         --parallel.waitForAll(stage1,scrlage)
-                        stage1()
+                        -- stage1()
+                        if farm_rescan then
+                            stage1()
+                        end
                         dist = dist - 1
                     end
                     turn()
@@ -392,10 +408,16 @@ function startfarm(funfarmargs)
                     while width ~= 0 do
                         while dist ~= 0 do
                             dopnt = 1
-                            parallel.waitForAll(stage1,scrlage)
+                            -- parallel.waitForAll(stage1,scrlage)
+                            if farm_rescan then
+                                stage1()
+                            end
                             dopnt = 1
                             turtle.forward()
-                            parallel.waitForAll(stage1,scrlage)
+                            -- parallel.waitForAll(stage1,scrlage)
+                            if farm_rescan then
+                                stage1()
+                            end
                             dist = dist - 1
                         end
                         turn()
