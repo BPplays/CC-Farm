@@ -104,6 +104,7 @@ print("gui ud end")
 
 
 local farm_prog_progress = "init"
+local loadedguilib = 0
 while loadedguilib ~= 1 do
     if os.loadAPI("AndysPrograms/api/gui/gui") then
         --print("loaded gui lib")
@@ -181,17 +182,8 @@ print("farm update end")
 
 
 function update_start_farm()
-    loadedguilib = 0
-    while loadedguilib ~= 1 do
-        if os.loadAPI("AndysPrograms/api/gui/gui") then
-            --print("loaded gui lib")
-            loadedguilib = 1
-        else
-            print(" NOTloaded gui lib")
-        end
-    end
     farm_prog_progress = "not not even start"
-    print(farm_prog_progress)
+    -- print(farm_prog_progress)
     while stopfarm == 0 do
         if _G.andy_farm_program_running == 0 then
             sleep(0)
@@ -261,7 +253,10 @@ end
 local function start_farm_lau()
     farm_prog_progress = "not not not(3) even start"
     --print(farm_prog_progress)
-    update_start_farm()
+    while _G.stopfarm ~= 1 do
+        xpcall(update_start_farm,error_handler)
+    end
+    -- update_start_farm()
 end
 local function start_para_lau()
     farm_prog_progress = "not not not not(4) even start"
