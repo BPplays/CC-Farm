@@ -155,11 +155,18 @@ function error_handler(err)
 end
 
 
+local function update_farm_api()
+    ud.update(farm_update)
+end
+local function update_goto()
+    ud.update(goto_update)
+end
+
 local function update_farm()
     -- shell.run(run_update, goto_update)
-    ud.update(goto_update)
+    
     -- shell.run(run_update, farm_update)
-    ud.update(farm_update)
+    parallel.waitForAll(update_farm_api,update_goto)
 end
 print("farm update start")
 update_farm()
@@ -254,7 +261,7 @@ local function start_para_lau()
     parallel.waitForAny(farm_gui_lau, start_farm_lau)
 end
 
-
+_G.stopfarm = 0
 while _G.stopfarm ~= 1 do
     --update_start_farm()
     _G.andy_farm_program_running = 0
