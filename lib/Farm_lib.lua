@@ -164,8 +164,8 @@ function startfarm(funfarmargs)
         totalsteps = totalstages
         endsteps = totalsteps + 1
         sub_lenth = lenth - 1
-        function chest()
-
+        local function chest()
+            local chest = 1
             gt.goto(chestloc)
             if Mode == 2 then
                 chest = 1
@@ -189,7 +189,7 @@ function startfarm(funfarmargs)
             if turnleftchest == 1 then
                 turtle.turnLeft()
             end
-            farm_rescan = true
+            --farm_rescan = true
             _G.farmexit = 1
         end
 
