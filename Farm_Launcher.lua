@@ -215,6 +215,7 @@ function update_start_farm()
                 while _G.farmexit ~= 1 do
                     if xpcall(para_farm,error_handler) then
                         update_farm()
+                        sleep(0)
                     else
                         -- sleep(2)
                         sleep(0)
@@ -222,7 +223,7 @@ function update_start_farm()
                         update_farm()
                     end
                 end
-
+                _ = nil * nil
                 
                 if errhnd ~= 0 then
                     sleep(0)
