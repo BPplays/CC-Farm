@@ -219,14 +219,16 @@ function update_start_farm()
                 if farmlauncherloop > 1 then 
                     launcherargs = {"noset"}
                 end
-                
-                if xpcall(para_farm,error_handler) then
-                    update_farm()
-                else
-                    -- sleep(2)
-                    sleep(0)
-                    errhnd = 0
-                    update_farm()
+                _G.farmexit = 0
+                while _G.farmexit ~= 1 do
+                    if xpcall(para_farm,error_handler) then
+                        update_farm()
+                    else
+                        -- sleep(2)
+                        sleep(0)
+                        errhnd = 0
+                        update_farm()
+                    end
                 end
 
                 

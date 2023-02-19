@@ -28,8 +28,8 @@ function startfarm(funfarmargs)
         end
         local maxW, maxH = term.getSize()
 
-        farmexit = 0
-        while farmexit ~= 1 do
+        _G.farmexit = 0
+        while _G.farmexit ~= 1 do
 
         local setmenu = _G.setmenu
 
@@ -190,7 +190,7 @@ function startfarm(funfarmargs)
                 turtle.turnLeft()
             end
             farm_rescan = true
-            farmexit = 1
+            _G.farmexit = 1
         end
 
 
@@ -394,10 +394,10 @@ function startfarm(funfarmargs)
             if done == endsteps then
                 chest()
                 done = 0
-                farmexit = 1
+                _G.farmexit = 1
             end
             width = st_width
-            if farmexit ~= 1 then
+            if _G.farmexit ~= 1 then
                 recenter()
             end
 
