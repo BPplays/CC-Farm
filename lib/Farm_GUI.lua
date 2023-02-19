@@ -23,7 +23,7 @@ function start_farm_gui(args)
 
     local function match_list(var,list)
         for i = 1,#list do
-            if var == list[i] then
+            if tostring(var) == list[i] then
                 return true
             end
         end
@@ -99,6 +99,7 @@ function start_farm_gui(args)
             fgui_exit = 1
 			farmexit = 1
 			stopfarm = 1
+            _G.stopfarm = 1
 
         end
         function chngset()
