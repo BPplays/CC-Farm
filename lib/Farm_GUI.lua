@@ -37,8 +37,11 @@ function start_farm_gui(args)
     function menu_init()
 
         function set_menu(menu)
-            prev_menu = cur_menu
+            local prev_menu_temp = cur_menu
             cur_menu = menu
+            if prev_menu_temp ~= cur_menu then
+                prev_menu = prev_menu_temp
+            end
 			selitem = 1
         end
         set_menu(main_menu)
