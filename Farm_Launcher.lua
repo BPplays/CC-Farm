@@ -28,13 +28,13 @@ if fs.exists "AndysPrograms/farm/dev_mode" then
     update_url = {"BPplays","CC-Update","dev","Update.lua","ud",tostring(load_update)}
     goto_update = {"BPplays","CC-Goto","dev","goto.lua","gt","AndysPrograms/api"}
     gui_update = {"BPplays","CC-Farm","dev","lib/Farm_GUI.lua","gui","AndysPrograms/api/gui"}
-    farm_update = {"BPplays","CC-Farm","dev","farm.lua","farm","AndysPrograms/farm"}
+    farm_update = {"BPplays","CC-Farm","dev","Farm_lib.lua","farm","AndysPrograms/farm"}
     _G.farm_devmode = true
 else
     update_url = {"BPplays","CC-Update","main","Update.lua","ud",tostring(load_update)}
     goto_update = {"BPplays","CC-Goto","main","goto.lua","gt","AndysPrograms/api"}
     gui_update = {"BPplays","CC-Farm","main","lib/Farm_GUI.lua","gui","AndysPrograms/api/gui"}
-    farm_update = {"BPplays","CC-Farm","main","farm.lua","farm","AndysPrograms/farm"}
+    farm_update = {"BPplays","CC-Farm","main","lib/Farm_lib.lua","farm","AndysPrograms/farm"}
     _G.farm_devmode = false
 end
 
@@ -168,13 +168,13 @@ local function update_farm()
     -- shell.run(run_update, goto_update)
     
     -- shell.run(run_update, farm_update)
-    -- parallel.waitForAll(update_farm_api,update_goto)
-    ud.update(goto_update)
-    ud.update(farm_update)
+    parallel.waitForAll(update_farm_api,update_goto)
+    -- ud.update(goto_update)
+    -- ud.update(farm_update)
 end
 print("farm update start")
--- parallel.waitForAll(update_farm,update_gui_para)
-update_gui_para()
+parallel.waitForAll(update_farm,update_gui_para)
+-- update_gui_para()
 -- update_farm()
 print("farm update end")
 
