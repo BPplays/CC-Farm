@@ -269,36 +269,36 @@ function startfarm(funfarmargs)
             -- for i=1,#crop_name do
             success, data = turtle.inspectDown()
             if success then
-                if dopnt == 6 then
-                if data.state.age ~= nil then
-                    scnmpnt = 0
-                    dlprns1 = 0
-                    percentagefloat = (data.state.age - 0) / (7 - 0) * 100
-                    percentage = math.floor(percentagefloat+0.5)
-                    scnmtmst = os.clock()
+                -- if dopnt == 6 then
+                -- if data.state.age ~= nil then
+                --     -- scnmpnt = 0
+                --     -- dlprns1 = 0
+                --     -- percentagefloat = (data.state.age - 0) / (7 - 0) * 100
+                --     -- percentage = math.floor(percentagefloat+0.5)
+                --     -- scnmtmst = os.clock()
 
-                    scagl = 0
-                    while dlprns1 < 1 do
-                        scagtmst = os.clock()
-                        --scnmpnt, dlprns1 = scrlnum(percentageold,percentage,tnstm,scnmtmst)
-                        scnmpnt = 1
-                        if dlprns1 == nil then
-                            dlprns1 = 0
-                        end
+                --     -- scagl = 0
+                --     -- while dlprns1 < 1 do
+                --         -- scagtmst = os.clock()
+                --         --scnmpnt, dlprns1 = scrlnum(percentageold,percentage,tnstm,scnmtmst)
+                --         -- scnmpnt = 1
+                --         -- if dlprns1 == nil then
+                --             -- dlprns1 = 0
+                --         -- end
 
-                        if scagl > 25 then
-                            sleep()
-                            scagl = 0
-                        end
-                        scagl = scagl + 1
-                        scagtmen = os.clock()
-                        scagtm = scagtmen - scagtmst
-                        end
-                    percentageold = percentage
+                --         -- if scagl > 25 then
+                --         --     sleep()
+                --         --     scagl = 0
+                --         -- end
+                --         -- scagl = scagl + 1
+                --         -- scagtmen = os.clock()
+                --         -- scagtm = scagtmen - scagtmst
+                --         -- end
+                --     -- percentageold = percentage
                     
                     
-                end
-                end
+                -- end
+                -- end
                 for i=1,#crop_name do
                     if (data.name == crop_name[i]) or (sortblock == 0) then
                         if data.state.age == crop_max_age or ignore_nil_age == 1 then
@@ -325,34 +325,34 @@ function startfarm(funfarmargs)
         end
 
         function scrlage()
-            for i=1,#crop_name do
-                success, data = turtle.inspectDown()
-                if success then
-                    if dopnt == 1 then
-                    if data.state.age ~= nil then
-                        scnmpnt = 0
-                        dlprns1 = 0
-                        percentagefloat = (data.state.age - 0) / (7 - 0) * 100
-                        percentage = math.floor(percentagefloat+0.5)
-                        scnmtmst = os.clock()
+            -- for i=1,#crop_name do
+            --     success, data = turtle.inspectDown()
+            --     if success then
+            --         if dopnt == 1 then
+            --         if data.state.age ~= nil then
+            --             scnmpnt = 0
+            --             dlprns1 = 0
+            --             percentagefloat = (data.state.age - 0) / (7 - 0) * 100
+            --             percentage = math.floor(percentagefloat+0.5)
+            --             scnmtmst = os.clock()
 
                         
-                        while dlprns1 < 1 do
-                            -- scnmpnt, dlprns1 = scrlnum(percentageold,percentage,0.5,scnmtmst)
-                            scnmpnt = 1
-                            if dlprns1 == nil then
-                                dlprns1 = 0
-                            end
+            --             while dlprns1 < 1 do
+            --                 -- scnmpnt, dlprns1 = scrlnum(percentageold,percentage,0.5,scnmtmst)
+            --                 scnmpnt = 1
+            --                 if dlprns1 == nil then
+            --                     dlprns1 = 0
+            --                 end
 
-                                sleep()
-                            end
-                        percentageold = percentage
+            --                     sleep()
+            --                 end
+            --             percentageold = percentage
                         
                         
-                    end
-                    end
-                end
-            end
+            --         end
+            --         end
+            --     end
+            -- end
         end
 
 
@@ -369,15 +369,15 @@ function startfarm(funfarmargs)
                     while dist ~= 0 do
                         dopnt = 1
                         -- parallel.waitForAll(stage1,scrlage)
-                        if farm_rescan then
+                        if farm_rescan == true then
                             stage1()
                         end
                         --stage1()
                         dopnt = 1
-                        turtle.forward()
+                        farm_move_foward()
                         --parallel.waitForAll(stage1,scrlage)
                         -- stage1()
-                        if farm_rescan then
+                        if farm_rescan == true then
                             stage1()
                         end
                         dist = dist - 1
@@ -414,7 +414,7 @@ function startfarm(funfarmargs)
                                 stage1()
                             end
                             dopnt = 1
-                            turtle.forward()
+                            farm_move_foward()
                             -- parallel.waitForAll(stage1,scrlage)
                             if farm_rescan then
                                 stage1()
@@ -428,9 +428,13 @@ function startfarm(funfarmargs)
                     -- term.clear()
                     while width ~= 0 do
                         while dist ~= 0 do
-                            stage2()
-                            turtle.forward()
-                            stage2()
+                            if farm_rescan then
+                                stage2()
+                            end
+                            farm_move_foward()
+                            if farm_rescan then
+                                stage2()
+                            end
                             dist = dist - 1
                         end
                         turn()
