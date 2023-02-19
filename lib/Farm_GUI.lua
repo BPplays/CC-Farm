@@ -11,19 +11,19 @@ function start_farm_gui(args)
 
     selitem = 1
     --input lists
-    con_up = {"keys.up","keys.w"}
-    con_down = {"keys.down","keys.s"}
-    con_left = {"keys.left","keys.a"}
-    con_right = {"keys.right","keys.d"}
-    con_select = {"keys.enter","keys.space"}
-    con_back = {"keys.leftShift","keys.b"}
-    con_quick_quit = {"keys.q"}
+    con_up = {keys.up,keys.w}
+    con_down = {keys.down,keys.s}
+    con_left = {keys.left,keys.a}
+    con_right = {keys.right,keys.d}
+    con_select = {keys.enter,keys.space}
+    con_back = {keys.leftShift,keys.b}
+    con_quick_quit = {keys.q}
 
 
 
     local function match_list(var,list)
         for i = 1,#list do
-            if tostring(var) == list[i] then
+            if var == list[i] then
                 return true
             end
         end
