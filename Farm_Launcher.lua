@@ -91,9 +91,7 @@ end
 -- shell.run(run_update, gui_update)
 os.loadAPI(run_update)
 print("gui ud start")
-local function update_gui_para()
-    ud.update(gui_update)
-end
+
 print("gui ud end")
 
 -- if fs.exists("AndysPrograms/api/pastebin_silent/ps") == false then
@@ -152,7 +150,10 @@ function error_handler(err)
     end
 end
 
-
+local function update_gui_para()
+    -- ud.update(gui_update)
+end
+ud.update(gui_update)
 local function update_farm_api()
     ud.update(farm_update)
 end
