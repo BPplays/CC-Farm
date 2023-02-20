@@ -245,10 +245,10 @@ function update_start_farm()
                     --     print("end ud")
                     -- end
                 -- end
-                print("start reloop")
+                -- print("start reloop")
                 update_farm()
                 -- sleep(0)
-                print("end ud")
+                -- print("end ud")
                 if errhnd ~= 0 then
                     sleep(0)
                     errhnd = 0
