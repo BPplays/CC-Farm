@@ -296,10 +296,11 @@ end
 _G.stopfarm = 0
 while _G.stopfarm ~= 1 do
     --update_start_farm()
-
-    local stu = fs.open("startup.lua", "w")
-    stu.write(fudargs)
-    stu.close()
+    if not fs.exists("startup.lua") then
+        local stu = fs.open("startup.lua", "w")
+        stu.write("sleep(5)\nshell.run(\"farm\", \"noset\")")
+        stu.close()
+    end
     os.loadAPI("AndysPrograms/farm/farm")
     _G.andy_farm_program_running = 0
     if launcherargs[1] == "noset" then
