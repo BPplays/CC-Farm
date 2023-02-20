@@ -180,6 +180,15 @@ parallel.waitForAll(update_farm,update_gui_para)
 print("farm update end")
 
 
+local function farm_exit_watcher()
+    while _G.farmexit ~= 1 do
+        sleep(0.1)
+    end
+end
+
+local function call_farm_error_risist()
+    xpcall(para_farm,error_handler)
+end
 
 function update_start_farm()
     farm_prog_progress = "not not even start"
@@ -212,8 +221,9 @@ function update_start_farm()
                     launcherargs = {"noset"}
                 end
                 _G.farmexit = 0
-                while _G.farmexit ~= 1 do
-                    xpcall(para_farm,error_handler)
+                parallel.waitForAny(call_farm_error_risist,farm_exit_watcher)
+                -- while _G.farmexit ~= 1 do
+                
                     -- if xpcall(para_farm,error_handler) then
                     --     print("start reloop")
                     --     update_farm()
@@ -227,11 +237,11 @@ function update_start_farm()
                     --     update_farm()
                     --     print("end ud")
                     -- end
-                end
-                print("start reloop")
+                -- end
+                -- print("start reloop")
                 update_farm()
                 -- sleep(0)
-                print("end ud")
+                -- print("end ud")
                 if errhnd ~= 0 then
                     sleep(0)
                     errhnd = 0

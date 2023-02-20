@@ -174,7 +174,7 @@ function startfarm(funfarmargs)
                 end
 
                 
-                print("start chest loop")
+                -- print("start chest loop")
                 for i=chest,16 do
                     turtle.select(i)
                     if chestdirection == 0 then
@@ -185,14 +185,14 @@ function startfarm(funfarmargs)
                         turtle.dropUp()
                     end
                 end
-                print("end chest loop")
+                -- print("end chest loop")
                 if turnleftchest == 1 then
                     turtle.turnLeft()
                 end
                 --farm_rescan = true
-                print("start chest fe1")
+                -- print("start chest fe1")
                 _G.farmexit = 1
-                print("end chest fe1")
+                -- print("end chest fe1")
             end
 
 
