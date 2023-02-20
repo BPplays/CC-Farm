@@ -257,15 +257,18 @@ end
 
 
 local function farm_gui()
+    -- print("farm_gui")
     gui.start_farm_gui(launcherargs)
 end
 local function farm_gui_lau()
+    -- print("farm_gui_lau")
     while _G.stopfarm ~= 1 do
         xpcall(farm_gui,error_handler)
     end
 end
 
 local function start_farm_lau()
+    -- print("start_farm_lau")
     farm_prog_progress = "not not not(3) even start"
     --print(farm_prog_progress)
     while _G.stopfarm ~= 1 do
@@ -275,6 +278,7 @@ local function start_farm_lau()
 end
 local function start_para_lau()
     farm_prog_progress = "not not not not(4) even start"
+    -- print("start_para_lau")
     --print(farm_prog_progress)
     parallel.waitForAny(farm_gui_lau, start_farm_lau)
 end
