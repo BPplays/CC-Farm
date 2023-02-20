@@ -67,12 +67,12 @@ while loadedgitlib ~= 1 do
     end
 end
 
-if fs.exists(run_update) == false then
-    fs.makeDir(load_update)
-    shell.run("cd",load_update)
-    shell.run("pastebin","get","uBa2UnVT","ud")
-    shell.run("cd","//")
-end
+-- if fs.exists(run_update) == false then
+--     fs.makeDir(load_update)
+--     shell.run("cd",load_update)
+--     shell.run("pastebin","get","uBa2UnVT","ud")
+--     shell.run("cd","//")
+-- end
 if fs.exists(run_update) == false then
     local i = 1
     -- while fs.exists(run_update) == false and i < 12 do
