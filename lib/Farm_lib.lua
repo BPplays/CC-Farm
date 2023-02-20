@@ -29,7 +29,7 @@ function startfarm(funfarmargs)
         local maxW, maxH = term.getSize()
 
         _G.farmexit = 0
-        while _G.farmexit ~= 1 do
+        while _G.farmexit == 0 do
 
             local setmenu = _G.setmenu
 
@@ -192,6 +192,9 @@ function startfarm(funfarmargs)
                 --farm_rescan = true
                 -- print("start chest fe1")
                 _G.farmexit = 1
+                if _G.farmexit = 1 then
+                    break
+                end
                 -- print("end chest fe1")
             end
 
