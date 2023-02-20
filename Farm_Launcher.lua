@@ -107,15 +107,7 @@ print("gui ud end")
 
 
 local farm_prog_progress = "init"
-local loadedguilib = 0
-while loadedguilib ~= 1 do
-    if os.loadAPI("AndysPrograms/api/gui/gui") then
-        --print("loaded gui lib")
-        loadedguilib = 1
-    else
-        print(" NOTloaded gui lib")
-    end
-end
+
 
 function get_running()
 	return andy_farm_program_running
@@ -182,6 +174,15 @@ parallel.waitForAll(update_farm,update_gui_para)
 -- update_farm()
 print("farm update end")
 
+local loadedguilib = 0
+while loadedguilib ~= 1 do
+    if os.loadAPI("AndysPrograms/api/gui/gui") then
+        --print("loaded gui lib")
+        loadedguilib = 1
+    else
+        print(" NOTloaded gui lib")
+    end
+end
 
 local function farm_exit_watcher()
     while _G.farmexit ~= 1 do
