@@ -213,18 +213,25 @@ function update_start_farm()
                 end
                 _G.farmexit = 0
                 while _G.farmexit ~= 1 do
-                    if xpcall(para_farm,error_handler) then
-                        update_farm()
-                        sleep(0)
-                    else
-                        -- sleep(2)
-                        sleep(0)
-                        errhnd = 0
-                        update_farm()
-                    end
+                    xpcall(para_farm,error_handler)
+                    -- if xpcall(para_farm,error_handler) then
+                    --     print("start reloop")
+                    --     update_farm()
+                    --     sleep(0)
+                    --     print("end ud")
+                    -- else
+                    --     print("start fail")
+                    --     -- sleep(2)
+                    --     sleep(0)
+                    --     errhnd = 0
+                    --     update_farm()
+                    --     print("end ud")
+                    -- end
                 end
-                _ = nil * nil
-                
+                print("start reloop")
+                update_farm()
+                -- sleep(0)
+                print("end ud")
                 if errhnd ~= 0 then
                     sleep(0)
                     errhnd = 0
