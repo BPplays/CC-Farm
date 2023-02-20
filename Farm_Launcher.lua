@@ -24,17 +24,20 @@ elseif launcherargs[1] == "-dev_disable" then
 end
 
 _G.farm_devmode = false
+local dev_or_main = "main"
 if fs.exists "AndysPrograms/farm/dev_mode" then
     update_url = {"BPplays","CC-Update","dev","Update.lua","ud",tostring(load_update)}
     goto_update = {"BPplays","CC-Goto","dev","Goto.lua","gt","AndysPrograms/api"}
     gui_update = {"BPplays","CC-Farm","dev","lib/Farm_GUI.lua","gui","AndysPrograms/api/gui"}
     farm_update = {"BPplays","CC-Farm","dev","lib/Farm_lib.lua","farm","AndysPrograms/farm"}
+    dev_or_main = "dev"
     _G.farm_devmode = true
 else
     update_url = {"BPplays","CC-Update","main","Update.lua","ud",tostring(load_update)}
     goto_update = {"BPplays","CC-Goto","main","Goto.lua","gt","AndysPrograms/api"}
     gui_update = {"BPplays","CC-Farm","main","lib/Farm_GUI.lua","gui","AndysPrograms/api/gui"}
     farm_update = {"BPplays","CC-Farm","main","lib/Farm_lib.lua","farm","AndysPrograms/farm"}
+    dev_or_main = "main"
     _G.farm_devmode = false
 end
 
@@ -126,7 +129,7 @@ fudargs = "sleep(5)\nshell.run(\"farm\", \"noset\")"
 --print (fudargs)
 --sleep (5)
 farmlauncherloop = 1
-stopfarm = 0 
+_G.stopfarm = 0 
 errhnd = 0
 function call_farm()
     farm.startfarm(launcherargs)
@@ -142,7 +145,7 @@ end
 
 function error_handler(err)
     if err == "Terminated" then
-        stopfarm = 1
+        _G.stopfarm = 1
     else
         local dot = 0
         -- term.setCursorPos(1, 1) 
@@ -193,7 +196,7 @@ end
 function update_start_farm()
     farm_prog_progress = "not not even start"
     -- print(farm_prog_progress)
-    while stopfarm == 0 do
+    while _G.stopfarm == 0 do
         if _G.andy_farm_program_running == 0 then
             sleep(0)
             farm_prog_progress = "not even start"
@@ -207,16 +210,10 @@ function update_start_farm()
         while _G.andy_farm_program_running == 1 do
             farm_prog_progress = "little even start"
             --print(farm_prog_progress)
-            if stopfarm == 0 then
+            if _G.stopfarm == 0 then
                 farm_prog_progress = "little more start"
                 --print(farm_prog_progress)
-                local stu = fs.open("startup.lua", "w")
-                stu.write(fudargs)
-                stu.close()
-                if errhnd == 0 then
 
-                end
-                os.loadAPI("AndysPrograms/farm/farm")
                 if farmlauncherloop > 1 then 
                     launcherargs = {"noset"}
                 end
@@ -285,6 +282,11 @@ end
 _G.stopfarm = 0
 while _G.stopfarm ~= 1 do
     --update_start_farm()
+
+    local stu = fs.open("startup.lua", "w")
+    stu.write(fudargs)
+    stu.close()
+    os.loadAPI("AndysPrograms/farm/farm")
     _G.andy_farm_program_running = 0
     if launcherargs[1] == "noset" then
         _G.andy_farm_program_running = 1
@@ -292,6 +294,6 @@ while _G.stopfarm ~= 1 do
 
     print("start")
     start_para_lau()
-    stopfarm = 1
+    _G.stopfarm = 1
     --parallel.waitForAny(farm_gui_lau, start_farm_lau)
 end
