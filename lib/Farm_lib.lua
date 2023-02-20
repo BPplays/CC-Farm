@@ -20,7 +20,7 @@ function startfarm(funfarmargs)
         end
     end
 
-    local setmenu = gui.get_setmenu()
+    -- local setmenu = gui.get_setmenu()
     --andy_farm_program_running = 0
 
     if fs.exists("AndysPrograms/Farm/settings") then
@@ -29,7 +29,7 @@ function startfarm(funfarmargs)
     local maxW, maxH = term.getSize()
 
     _G.farmexit = 0
-    while _G.farmexit == 0 do
+    if _G.farmexit == 0 then
 
         local setmenu = _G.setmenu
 
@@ -189,17 +189,17 @@ function startfarm(funfarmargs)
             if turnleftchest == 1 then
                 turtle.turnLeft()
             end
-            --farm_rescan = true
+            farm_rescan = true
             -- print("start chest fe1")
             _G.farmexit = 1
-            if _G.farmexit = 1 then
-                break
-            end
+            -- if _G.farmexit = 1 then
+            --     break
+            -- end
             -- print("end chest fe1")
         end
 
 
-        function turn()
+        local function turn()
             if width >= 2 then
                 if right == 1 then
                     turtle.turnRight()
@@ -227,7 +227,7 @@ function startfarm(funfarmargs)
         end
 
 
-        function recenter()                             
+        local function recenter()                             
             working_turn_right_recenter_times = turn_right_recenter_times
 
             working_forward_recenter_times = forward_recenter_times
@@ -389,41 +389,43 @@ function startfarm(funfarmargs)
             end            
         end
 
+        while _G.farmexit == 0 do
+            if width == 0 or width == nil  then
+                done = done + 1
+                if done == endsteps then
+                    chest()
+                    -- done = 0
+                    _G.farmexit = 1
+                    break
+                end
+                width = st_width
+                if _G.farmexit ~= 1 then
+                    recenter()
+                end
 
-        if width == 0 or width == nil  then
-            done = done + 1
-            if done == endsteps then
-                chest()
-                -- done = 0
-                _G.farmexit = 1
-            end
-            width = st_width
-            if _G.farmexit ~= 1 then
-                recenter()
-            end
+            elseif width ~= 0 then
 
-        elseif width ~= 0 then
-
-            if dist ~= 0 then
-                if done == 1 then
-                    stg1tg()
-                elseif done == grabstage then
-                    -- term.clear()
-                    while width ~= 0 do
-                        while dist ~= 0 do
-                            if farm_rescan then
-                                stage2()
+                if dist ~= 0 then
+                    if done == 1 then
+                        stg1tg()
+                    elseif done == grabstage then
+                        -- term.clear()
+                        while width ~= 0 do
+                            while dist ~= 0 do
+                                if farm_rescan then
+                                    stage2()
+                                end
+                                farm_move_foward()
+                                if farm_rescan then
+                                    stage2()
+                                end
+                                dist = dist - 1
                             end
-                            farm_move_foward()
-                            if farm_rescan then
-                                stage2()
-                            end
-                            dist = dist - 1
+                            turn()
                         end
-                        turn()
-                    end
-            end
+                end
 
+            end
         end
         end
     end
