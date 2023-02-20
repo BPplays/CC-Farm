@@ -1,4 +1,4 @@
-local update_name = "updateV7.1"
+local update_name = "updateV7.2"
 
 
 local git_url = "WPg3HSiU"
