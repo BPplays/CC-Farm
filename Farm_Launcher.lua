@@ -47,15 +47,16 @@ end
 if fs.exists("AndysPrograms/api/git/git") == false then
     fs.makeDir("AndysPrograms/api/git")
     shell.run("cd","AndysPrograms/api/git")
-    shell.run("pastebin","get","WPg3HSiU","git")
+    shell.run("git","get","BPplays","CC-git-api","main","git","git")
     shell.run("cd ","//")
 end
 if fs.exists("AndysPrograms/api/git/git") == false then
     fs.makeDir("AndysPrograms/api/git")
     shell.run("cd","AndysPrograms/api/git")
-    shell.run("git","get","BPplays","CC-git-api","main","git","git")
+    shell.run("pastebin","get","WPg3HSiU","git")
     shell.run("cd ","//")
 end
+
 
 local loadedgitlib = 0
 while loadedgitlib ~= 1 do
