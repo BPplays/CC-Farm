@@ -191,7 +191,10 @@ end
 
 local function farm_exit_watcher()
     while _G.farmexit ~= 1 do
-        sleep(0.1)
+        sleep(0.05)
+        if _G.farmexit == 1 then
+            break
+        end
     end
 end
 
@@ -210,7 +213,7 @@ function update_start_farm()
             --print(get_running())
             -- while _G.init_gui ~= 1 do
                 
-            --     sleep(0.1)
+                sleep(0.05)
             -- end
         end
         while _G.andy_farm_program_running == 1 do
