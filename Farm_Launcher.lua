@@ -115,7 +115,7 @@ function set_running(n)
 end
 
 
-fudargs = "sleep(5)\nshell.run(\"farm\", \"noset\")"
+local fudargs = "sleep(5)\nshell.run(\"farm\", \"noset\")"
 --print (fudargs)
 --sleep (5)
 farmlauncherloop = 1
