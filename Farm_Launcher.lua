@@ -297,9 +297,9 @@ _G.stopfarm = 0
 while _G.stopfarm ~= 1 do
     --update_start_farm()
     if not fs.exists("startup.lua") then
-        local stu = fs.open("startup.lua", "w")
-        stu.write("sleep(5)\nshell.run(\"farm\", \"noset\")")
-        stu.close()
+        local startup_farm = io.open("startup.lua", "w")
+        startup_farm.write("sleep(5)\nshell.run(\"farm\", \"noset\")")
+        startup_farm.close()
     end
     os.loadAPI("AndysPrograms/farm/farm")
     _G.andy_farm_program_running = 0
