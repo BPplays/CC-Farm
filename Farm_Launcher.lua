@@ -16,6 +16,7 @@ local run_update = load_update.."/".."ud"
 local update_url = {}
 local goto_update = {}
 local gui_update = {}
+local startup_update = {}
 local farm_update = {}
 if launcherargs[1] == "-dev_enable" then
     fs.makeDir("AndysPrograms/farm/dev_mode")
@@ -29,6 +30,7 @@ if fs.exists "AndysPrograms/farm/dev_mode" then
     update_url = {"BPplays","CC-Update","dev","Update.lua","ud",tostring(load_update)}
     goto_update = {"BPplays","CC-Goto","dev","Goto.lua","gt","AndysPrograms/api"}
     gui_update = {"BPplays","CC-Farm","dev","lib/Farm_GUI.lua","gui","AndysPrograms/api/gui"}
+    startup_update = {"BPplays","CC-Farm","dev","lib/startup.lua","startup.lua",""}
     farm_update = {"BPplays","CC-Farm","dev","lib/Farm_lib.lua","farm","AndysPrograms/farm"}
     dev_or_main = "dev"
     _G.farm_devmode = true
@@ -36,6 +38,7 @@ else
     update_url = {"BPplays","CC-Update","main","Update.lua","ud",tostring(load_update)}
     goto_update = {"BPplays","CC-Goto","main","Goto.lua","gt","AndysPrograms/api"}
     gui_update = {"BPplays","CC-Farm","main","lib/Farm_GUI.lua","gui","AndysPrograms/api/gui"}
+    startup_update = {"BPplays","CC-Farm","main","lib/startup.lua","startup.lua",""}
     farm_update = {"BPplays","CC-Farm","main","lib/Farm_lib.lua","farm","AndysPrograms/farm"}
     dev_or_main = "main"
     _G.farm_devmode = false
@@ -297,9 +300,10 @@ _G.stopfarm = 0
 while _G.stopfarm ~= 1 do
     --update_start_farm()
     if not fs.exists("startup.lua") then
-        local startup_farm = io.open("startup.lua", "w")
-        startup_farm.write("sleep(5)\nshell.run(\"farm\", \"noset\")")
-        startup_farm.close()
+    --     local startup_farm = io.open("startup.lua", "w")
+    --     startup_farm.write("sleep(5)\nshell.run(\"farm\", \"noset\")")
+    --     startup_farm.close()
+        ud.update(startup_update)
     end
     os.loadAPI("AndysPrograms/farm/farm")
     _G.andy_farm_program_running = 0
