@@ -228,7 +228,7 @@ function update_start_farm()
                 end
                 _G.farmexit = 0
                 -- parallel.waitForAny(call_farm_error_risist,farm_exit_watcher)
-                xpcall(call_farm,error_handler)
+                xpcall(para_farm,error_handler)
                 -- while _G.farmexit ~= 1 do
                 
                     -- if xpcall(para_farm,error_handler) then
