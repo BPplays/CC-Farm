@@ -458,12 +458,12 @@ function start_farm_gui(args)
                         extra_next_select_spaces = 2 * extra_next_select_spaces * (1 - extra_next_select_spaces) + 0.5
                     end
                     temp_num = extra_next_select_spaces * (next_string_lines * 2)
-                    if temp_num <= next_string_lines then
-                        for i=0,math.floor(temp_num + 0.5) do
+                    if extra_next_select_spaces <= 0.5 then
+                        for i=1,math.floor(temp_num + 0.5) do
                             extra_next_string = extra_next_string.." "
                         end
                     else
-                        for i=0,next_string_lines - math.floor((temp_num - next_string_lines) + 0.5) do
+                        for i=1,next_string_lines - math.floor(((next_string_lines * 2)+((next_string_lines - (temp_num - next_string_lines))) + 0.5)) do
                             extra_next_string = extra_next_string.." "
                         end
                     end
