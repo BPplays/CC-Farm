@@ -40,7 +40,7 @@ function start_farm_gui(args)
     con_back = {keys.leftShift,keys.b}
     con_quick_quit = {keys.q}
 
-    os.loadAPI("AndysPrograms/api/gui/themes/Catppuccin Mocha/cm")
+    os.loadAPI("AndysPrograms/api/gui/themes/Catppuccin_Mocha/cm")
     local function set_colors()
         cm.set_theme()
         term.setBackgroundColor(colors.gray)

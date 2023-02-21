@@ -284,6 +284,7 @@ end
 local function farm_gui_lau()
     -- print("farm_gui_lau")
     while _G.stopfarm ~= 1 do
+        -- farm_gui()
         xpcall(farm_gui,error_handler)
     end
 end
