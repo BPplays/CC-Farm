@@ -9,7 +9,7 @@ function start_farm_gui(args)
     local extra_next_select_spaces = 2
     local epoch_mul = 72000 / 1000
     --in milisecs
-    local trans_time = 4000 * epoch_mul
+    local trans_time = 280 * epoch_mul
     local extra_next_string = ""
     local extra_next_string_output = ""
     local prev_extra_next_string = ""
