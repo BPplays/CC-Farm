@@ -7,8 +7,9 @@ function start_farm_gui(args)
 
     local draw_queue = 1
     local extra_next_select_spaces = 2
-    local epoch_mul = 72000
-    local trans_time = 0.4 * epoch_mul
+    local epoch_mul = 72000 / 1000
+    --in milisecs
+    local trans_time = 4000 * epoch_mul
     local extra_next_string = ""
     local prev_extra_next_string = ""
     local col_prev_time = os.epoch() - trans_time
