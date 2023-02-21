@@ -447,6 +447,7 @@ function start_farm_gui(args)
             while true do
                 local temp_num = 0
                 extra_next_string = ""
+                local down_proc = false
                 local extra_next_select_spaces = (((os.epoch() - (col_prev_time - trans_time)) / trans_time) - 1)
                 if extra_next_select_spaces >= 1 then
                     extra_next_string = ""
@@ -457,15 +458,20 @@ function start_farm_gui(args)
                     elseif extra_next_select_spaces > 0.5 then
                         -- extra_next_select_spaces = extra_next_select_spaces + mix_cache_eq
                         extra_next_select_spaces = 2 * extra_next_select_spaces * (1 - extra_next_select_spaces) + 0.5
+                        down_proc = true
                     end
                     temp_num = extra_next_select_spaces * (next_string_lines * 2)
-                    if extra_next_select_spaces <= 0.5 then
+                    if down_proc == false then
                         upper_curve = math.floor(temp_num + 0.5)
                         -- for i=1,math.floor(temp_num + 0.5) do
                             -- extra_next_string = extra_next_string.." "
                         -- end
                     else
-                        upper_curve = next_string_lines + math.floor((-(temp_num - next_string_lines)) + 0.5)
+                        upper_curve = math.floor(temp_num + 0.5)
+                        for i=1,temp_num - next_string_lines do
+                            upper_curve = upper_curve - 1
+                        end
+                        -- upper_curve = next_string_lines + math.floor((-(temp_num - next_string_lines)) + 0.5)
                         -- for i=1,math.floor(((next_string_lines * 2)+((next_string_lines - (temp_num - next_string_lines))) + 0.5)) do
                             -- extra_next_string = extra_next_string.." "
                         -- end
