@@ -446,14 +446,15 @@ function start_farm_gui(args)
             while true do
                 local temp_num = 0
                 extra_next_string = ""
+                local extra_next_select_spaces = (((os.epoch() - (col_prev_time - trans_time)) / trans_time) - 1)
                 if extra_next_select_spaces >= 1 then
                     extra_next_string = ""
                 else
-                    local mix_cache_eq = (((os.epoch() - (col_prev_time - trans_time)) / trans_time) - 1)
+                    
                     if extra_next_select_spaces <= 0.5 then
-                        extra_next_select_spaces = extra_next_select_spaces + mix_cache_eq
+                        -- extra_next_select_spaces = extra_next_select_spaces + mix_cache_eq
                     elseif extra_next_select_spaces > 0.5 then
-                        extra_next_select_spaces = extra_next_select_spaces + mix_cache_eq
+                        -- extra_next_select_spaces = extra_next_select_spaces + mix_cache_eq
                         extra_next_select_spaces = 2 * extra_next_select_spaces * (1 - extra_next_select_spaces) + 0.5
                     end
                     temp_num = extra_next_select_spaces * (next_string_lines * 2)
@@ -467,11 +468,12 @@ function start_farm_gui(args)
                         end
                     end
                 end
-                if extra_next_string ~= prev_extra_next_string then
+                extra_next_string_output = extra_next_string
+                if extra_next_string_output ~= prev_extra_next_string then
                     draw_queue = draw_queue + 1
                 end
-                prev_extra_next_string = extra_next_string
-                extra_next_string_output = extra_next_string
+                prev_extra_next_string = extra_next_string_output
+                
                 sleep(0)
             end
         end
