@@ -279,12 +279,12 @@ function start_farm_gui(args)
         end
 
         local function draw_to_screen(ds_list)
-            local i = maxH
-            while i >= 1 do
+            for i=1,maxH do
                 term.setCursorPos(1,i)
-                --print(ds_list[i])
-                term.write(ds_list[i])
-                i = i - 1
+                term.clearLine()
+                if ds_list[i] ~= nil then
+                    term.write(ds_list[i])
+                end
             end
         end
         function set_print()
