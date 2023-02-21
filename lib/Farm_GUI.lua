@@ -1,23 +1,6 @@
 -- local andy_farm_program_running = 0
 function start_farm_gui(args)
 
-    local main_menu_base = {
-        {text = "AFarm V12",options = "Start", handler = start_stop_farm},
-        {options = "Options", handler = options_farm},
-        {options = "Exit", handler = exit}
-    }
-    local setings_menu_base = {
-        {options = "Finish editing", handler = mainmenu_farm},
-        {text = "Farm Lenth", setname = "Farm Lenth", options = settings.get("Farm Lenth"), type = "num", handler = chngset},
-        {text = "Farm Width", setname = "Farm Width", options = settings.get("Farm Width"), type = "num", handler = chngset},
-        {text = "Mode, 1 = Nrml, 2 = Pumpkin/Melon/Sugarcane", setname = "Mode", options = settings.get("Mode"), type = "num", handler = chngset},
-        {text = "Start Location", setname = "Start Location", options = settings.get("Start Location"), type = deftab, handler = chngset},
-        {text = "Chest Location", setname = "Chest Location", options = settings.get("Chest Location"), type = deftab, handler = chngset},
-        {text = "Chest Direction 0=fwd 2=up 1=dn", setname = "Chest Direction", options = settings.get("Chest Direction"), type = "num", handler = chngset},
-        {text = "Sort Blocks", setname = "Sort Blocks", options = settings.get("Sort Blocks"), type = "num", handler = chngset},
-        {text = "Sort Block Names", setname = "Sort Block Names", options = settings.get("Sort Block Names"), type = deftab, handler = chngset}
-    }
-
 
 
     local fgui_exit = 0
@@ -167,14 +150,28 @@ function start_farm_gui(args)
         end
 
 		main_menu = {}
-		main_menu = main_menu_base
+		main_menu = {
+            {text = "AFarm V12",options = "Start", handler = start_stop_farm},
+            {options = "Options", handler = options_farm},
+            {options = "Exit", handler = exit}
+        }
         function resetmenu()
             deftab = {}
 
 
 
             local setmenu = {}
-            setmenu = setings_menu_base
+            setmenu = {
+        {options = "Finish editing", handler = mainmenu_farm},
+        {text = "Farm Lenth", setname = "Farm Lenth", options = settings.get("Farm Lenth"), type = "num", handler = chngset},
+        {text = "Farm Width", setname = "Farm Width", options = settings.get("Farm Width"), type = "num", handler = chngset},
+        {text = "Mode, 1 = Nrml, 2 = Pumpkin/Melon/Sugarcane", setname = "Mode", options = settings.get("Mode"), type = "num", handler = chngset},
+        {text = "Start Location", setname = "Start Location", options = settings.get("Start Location"), type = deftab, handler = chngset},
+        {text = "Chest Location", setname = "Chest Location", options = settings.get("Chest Location"), type = deftab, handler = chngset},
+        {text = "Chest Direction 0=fwd 2=up 1=dn", setname = "Chest Direction", options = settings.get("Chest Direction"), type = "num", handler = chngset},
+        {text = "Sort Blocks", setname = "Sort Blocks", options = settings.get("Sort Blocks"), type = "num", handler = chngset},
+        {text = "Sort Block Names", setname = "Sort Block Names", options = settings.get("Sort Block Names"), type = deftab, handler = chngset}
+    }
 			_G.setmenu = setmenu
 			setmenu_set = 1
 			setmain_start()
