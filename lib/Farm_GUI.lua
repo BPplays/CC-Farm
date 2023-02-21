@@ -9,7 +9,7 @@ function start_farm_gui(args)
     local extra_next_select_spaces = 2
     local epoch_mul = 72000 / 1000
     --in milisecs
-    local trans_time = 280 * epoch_mul
+    local trans_time = 125 * epoch_mul
     local extra_next_string = ""
     local extra_next_string_output = ""
     local prev_extra_next_string = ""
@@ -477,6 +477,11 @@ function start_farm_gui(args)
                     end
                     OutQuadBlend(extra_next_select_spaces)
                     temp_num = extra_next_select_spaces * (next_string_lines * 2)
+                    if extra_next_select_spaces > 0.4 and extra_next_select_spaces < 0.6 then
+                        temp_num = next_string_lines
+                    end
+
+
                     if down_proc == false then
                         upper_curve = math.floor(temp_num + 0.5)
                         -- for i=1,math.floor(temp_num + 0.5) do
