@@ -443,6 +443,21 @@ function start_farm_gui(args)
             end
 
 		menu_init()
+
+        local function OutQuadBlend(t)
+            local temp_blend = 0
+            if t <= 0.5 then
+                temp_blend = t
+                -- return 2.0 * t * t;
+            else --t == 0.5
+                temp_blend = 2.0 * t * (1.0 - t) + 0.5;
+            end
+            if temp_blend <= 1 then
+                return temp_blend
+            else
+                return 1
+            end
+        end
 		local function fancy_extra_next_sel_curve()
             while true do
                 local temp_num = 0
@@ -457,9 +472,10 @@ function start_farm_gui(args)
                         -- extra_next_select_spaces = extra_next_select_spaces + mix_cache_eq
                     elseif extra_next_select_spaces > 0.5 then
                         -- extra_next_select_spaces = extra_next_select_spaces + mix_cache_eq
-                        extra_next_select_spaces = 2 * extra_next_select_spaces * (1 - extra_next_select_spaces) + 0.5
+                        -- extra_next_select_spaces = 2 * extra_next_select_spaces * (1 - extra_next_select_spaces) + 0.5
                         down_proc = true
                     end
+                    OutQuadBlend(extra_next_select_spaces)
                     temp_num = extra_next_select_spaces * (next_string_lines * 2)
                     if down_proc == false then
                         upper_curve = math.floor(temp_num + 0.5)
