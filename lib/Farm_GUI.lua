@@ -16,6 +16,7 @@ function start_farm_gui(args)
     local col_prev_time = os.epoch() - trans_time
     col_prev_time = col_prev_time - trans_time
     local next_string_lines = 3
+    local upper_curve
     
     selitem = 1
     --input lists
@@ -459,13 +460,18 @@ function start_farm_gui(args)
                     end
                     temp_num = extra_next_select_spaces * (next_string_lines * 2)
                     if extra_next_select_spaces <= 0.5 then
-                        for i=1,math.floor(temp_num + 0.5) do
-                            extra_next_string = extra_next_string.." "
-                        end
+                        upper_curve = math.floor(temp_num + 0.5)
+                        -- for i=1,math.floor(temp_num + 0.5) do
+                            -- extra_next_string = extra_next_string.." "
+                        -- end
                     else
-                        for i=1,next_string_lines - math.floor(((next_string_lines * 2)+((next_string_lines - (temp_num - next_string_lines))) + 0.5)) do
-                            extra_next_string = extra_next_string.." "
-                        end
+                        upper_curve = math.floor(((next_string_lines * 2)+((next_string_lines - (temp_num - next_string_lines))) + 0.5))
+                        -- for i=1,math.floor(((next_string_lines * 2)+((next_string_lines - (temp_num - next_string_lines))) + 0.5)) do
+                            -- extra_next_string = extra_next_string.." "
+                        -- end
+                    end
+                    for i=1,upper_curve do
+                        extra_next_string = extra_next_string.." "
                     end
                 end
                 extra_next_string_output = extra_next_string
