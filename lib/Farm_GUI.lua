@@ -1,12 +1,12 @@
 -- local andy_farm_program_running = 0
 function start_farm_gui(args)
 
-    main_menu_base = {
+    local main_menu_base = {
         {text = "AFarm V12",options = "Start", handler = start_stop_farm},
         {options = "Options", handler = options_farm},
         {options = "Exit", handler = exit}
     }
-    setings_menu_base = {
+    local setings_menu_base = {
         {options = "Finish editing", handler = mainmenu_farm},
         {text = "Farm Lenth", setname = "Farm Lenth", options = settings.get("Farm Lenth"), type = "num", handler = chngset},
         {text = "Farm Width", setname = "Farm Width", options = settings.get("Farm Width"), type = "num", handler = chngset},
@@ -46,7 +46,7 @@ function start_farm_gui(args)
         term.setBackgroundColor(colors.gray)
         term.setTextColor(colors.white)
     end
-    set_colors()
+    
     local function match_list(var,list)
         for i = 1,#list do
             if var == list[i] then
@@ -463,6 +463,7 @@ function start_farm_gui(args)
 		--os.loadAPI("farm")
 		--os.loadAPI("AndysPrograms/Farm/farm")
         while fgui_exit == 0 do
+            set_colors()
 			if setmenu_set == 1 then
 				init_gui = 1
 				_G.init_gui = 1
