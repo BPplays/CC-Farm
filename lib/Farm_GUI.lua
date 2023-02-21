@@ -1,5 +1,25 @@
 -- local andy_farm_program_running = 0
 function start_farm_gui(args)
+
+    main_menu_base = {
+        {text = "AFarm V12",options = "Start", handler = start_stop_farm},
+        {options = "Options", handler = options_farm},
+        {options = "Exit", handler = exit}
+    }
+    setings_menu_base = {
+        {options = "Finish editing", handler = mainmenu_farm},
+        {text = "Farm Lenth", setname = "Farm Lenth", options = settings.get("Farm Lenth"), type = "num", handler = chngset},
+        {text = "Farm Width", setname = "Farm Width", options = settings.get("Farm Width"), type = "num", handler = chngset},
+        {text = "Mode, 1 = Nrml, 2 = Pumpkin/Melon/Sugarcane", setname = "Mode", options = settings.get("Mode"), type = "num", handler = chngset},
+        {text = "Start Location", setname = "Start Location", options = settings.get("Start Location"), type = deftab, handler = chngset},
+        {text = "Chest Location", setname = "Chest Location", options = settings.get("Chest Location"), type = deftab, handler = chngset},
+        {text = "Chest Direction 0=fwd 2=up 1=dn", setname = "Chest Direction", options = settings.get("Chest Direction"), type = "num", handler = chngset},
+        {text = "Sort Blocks", setname = "Sort Blocks", options = settings.get("Sort Blocks"), type = "num", handler = chngset},
+        {text = "Sort Block Names", setname = "Sort Block Names", options = settings.get("Sort Block Names"), type = deftab, handler = chngset}
+    }
+
+
+
     local fgui_exit = 0
     local sel_screen_pos = 6
 	farm_prog_progress = "initgui"
@@ -8,7 +28,7 @@ function start_farm_gui(args)
 	-- if args[1] == "noset" then
 	-- 	andy_farm_program_running = 1
 	-- end
-    
+
 
     selitem = 1
     --input lists
@@ -20,8 +40,13 @@ function start_farm_gui(args)
     con_back = {keys.leftShift,keys.b}
     con_quick_quit = {keys.q}
 
-
-
+    os.loadAPI("AndysPrograms/api/gui/themes/Catppuccin Mocha/cm")
+    local function set_colors()
+        cm.set_theme()
+        term.setBackgroundColor(colors.gray)
+        term.setTextColor(colors.white)
+    end
+    set_colors()
     local function match_list(var,list)
         for i = 1,#list do
             if var == list[i] then
@@ -142,28 +167,14 @@ function start_farm_gui(args)
         end
 
 		main_menu = {}
-		main_menu = {
-			{options = "Start", handler = start_stop_farm},
-			{options = "Options", handler = options_farm},
-			{options = "Exit", handler = exit}
-		}
+		main_menu = main_menu_base
         function resetmenu()
             deftab = {}
 
 
 
             local setmenu = {}
-            setmenu = {
-                {options = "Finish editing", handler = mainmenu_farm},
-                {text = "Farm Lenth", setname = "Farm Lenth", options = settings.get("Farm Lenth"), type = "num", handler = chngset},
-                {text = "Farm Width", setname = "Farm Width", options = settings.get("Farm Width"), type = "num", handler = chngset},
-                {text = "Mode, 1 = Nrml, 2 = Pumpkin/Melon/Sugarcane", setname = "Mode", options = settings.get("Mode"), type = "num", handler = chngset},
-                {text = "Start Location", setname = "Start Location", options = settings.get("Start Location"), type = deftab, handler = chngset},
-                {text = "Chest Location", setname = "Chest Location", options = settings.get("Chest Location"), type = deftab, handler = chngset},
-                {text = "Chest Direction 0=fwd 2=up 1=dn", setname = "Chest Direction", options = settings.get("Chest Direction"), type = "num", handler = chngset},
-                {text = "Sort Blocks", setname = "Sort Blocks", options = settings.get("Sort Blocks"), type = "num", handler = chngset},
-                {text = "Sort Block Names", setname = "Sort Block Names", options = settings.get("Sort Block Names"), type = deftab, handler = chngset}
-            }
+            setmenu = setings_menu_base
 			_G.setmenu = setmenu
 			setmenu_set = 1
 			setmain_start()
