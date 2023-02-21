@@ -1,8 +1,5 @@
 -- local andy_farm_program_running = 0
 function start_farm_gui(args)
-
-
-
     local fgui_exit = 0
     local sel_screen_pos = 6
 	farm_prog_progress = "initgui"
@@ -11,8 +8,16 @@ function start_farm_gui(args)
 	-- if args[1] == "noset" then
 	-- 	andy_farm_program_running = 1
 	-- end
-
-
+    local draw_queue = 1
+    local extra_next_select_spaces = 2
+    local epoch_mul = 72000
+    local trans_time = 0.4 * epoch_mul
+    local extra_next_string = ""
+    local prev_extra_next_string = ""
+    local col_prev_time = os.epoch() - trans_time
+    col_prev_time = col_prev_time - trans_time
+    local next_string_lines = 3
+    
     selitem = 1
     --input lists
     con_up = {keys.up,keys.w}
@@ -23,13 +28,8 @@ function start_farm_gui(args)
     con_back = {keys.leftShift,keys.b}
     con_quick_quit = {keys.q}
 
-    os.loadAPI("AndysPrograms/api/gui/themes/Catppuccin_Mocha/cm")
-    local function set_colors()
-        cm.set_theme()
-        term.setBackgroundColor(colors.gray)
-        term.setTextColor(colors.white)
-    end
-    
+
+
     local function match_list(var,list)
         for i = 1,#list do
             if var == list[i] then
@@ -151,10 +151,10 @@ function start_farm_gui(args)
 
 		main_menu = {}
 		main_menu = {
-            {text = "AFarm V12",options = "Start", handler = start_stop_farm},
-            {options = "Options", handler = options_farm},
-            {options = "Exit", handler = exit}
-        }
+			{options = "Start", handler = start_stop_farm},
+			{options = "Options", handler = options_farm},
+			{options = "Exit", handler = exit}
+		}
         function resetmenu()
             deftab = {}
 
@@ -162,16 +162,16 @@ function start_farm_gui(args)
 
             local setmenu = {}
             setmenu = {
-        {options = "Finish editing", handler = mainmenu_farm},
-        {text = "Farm Lenth", setname = "Farm Lenth", options = settings.get("Farm Lenth"), type = "num", handler = chngset},
-        {text = "Farm Width", setname = "Farm Width", options = settings.get("Farm Width"), type = "num", handler = chngset},
-        {text = "Mode, 1 = Nrml, 2 = Pumpkin/Melon/Sugarcane", setname = "Mode", options = settings.get("Mode"), type = "num", handler = chngset},
-        {text = "Start Location", setname = "Start Location", options = settings.get("Start Location"), type = deftab, handler = chngset},
-        {text = "Chest Location", setname = "Chest Location", options = settings.get("Chest Location"), type = deftab, handler = chngset},
-        {text = "Chest Direction 0=fwd 2=up 1=dn", setname = "Chest Direction", options = settings.get("Chest Direction"), type = "num", handler = chngset},
-        {text = "Sort Blocks", setname = "Sort Blocks", options = settings.get("Sort Blocks"), type = "num", handler = chngset},
-        {text = "Sort Block Names", setname = "Sort Block Names", options = settings.get("Sort Block Names"), type = deftab, handler = chngset}
-    }
+                {options = "Finish editing", handler = mainmenu_farm},
+                {text = "Farm Lenth", setname = "Farm Lenth", options = settings.get("Farm Lenth"), type = "num", handler = chngset},
+                {text = "Farm Width", setname = "Farm Width", options = settings.get("Farm Width"), type = "num", handler = chngset},
+                {text = "Mode, 1 = Nrml, 2 = Pumpkin/Melon/Sugarcane", setname = "Mode", options = settings.get("Mode"), type = "num", handler = chngset},
+                {text = "Start Location", setname = "Start Location", options = settings.get("Start Location"), type = deftab, handler = chngset},
+                {text = "Chest Location", setname = "Chest Location", options = settings.get("Chest Location"), type = deftab, handler = chngset},
+                {text = "Chest Direction 0=fwd 2=up 1=dn", setname = "Chest Direction", options = settings.get("Chest Direction"), type = "num", handler = chngset},
+                {text = "Sort Blocks", setname = "Sort Blocks", options = settings.get("Sort Blocks"), type = "num", handler = chngset},
+                {text = "Sort Block Names", setname = "Sort Block Names", options = settings.get("Sort Block Names"), type = deftab, handler = chngset}
+            }
 			_G.setmenu = setmenu
 			setmenu_set = 1
 			setmain_start()
@@ -439,41 +439,85 @@ function start_farm_gui(args)
                 elseif match_list(key,con_up) then
                     if selitem > 1 then
                         --setsoffset = setsoffset + 2.1
-                        setsoffset = math.floor(setsoffset)
+                        -- setsoffset = math.floor(setsoffset)
                         selitem = selitem - 1
+                        col_prev_time = os.epoch()
+                        extra_next_select_spaces = 0
                     end
                 elseif match_list(key,con_down) then
                     if selitem < (#menu) then
                         --setsoffset = setsoffset - 1.9
-                        setsoffset = math.floor(setsoffset)
+                        -- setsoffset = math.floor(setsoffset)
                         selitem = selitem + 1
+                        col_prev_time = os.epoch()
+                        extra_next_select_spaces = 0
                     end
                 elseif match_list(key,con_back) then
                     menu_back()
                 elseif match_list(key,con_quick_quit) then
                     exit()
                 end
+                if key ~= nil then
+                    draw_queue = draw_queue + 1
+                end
             end
 
 		menu_init()
-		
+		local function fancy_extra_next_sel_curve()
+            while true do
+                local temp_num = 0
+                extra_next_string = ""
+                if extra_next_select_spaces >= 1 then
+                    extra_next_string = ""
+                else
+                    local mix_cache_eq = (((os.epoch() - (col_prev_time - trans_time)) / trans_time) - 1)
+                    if extra_next_select_spaces <= 0.5 then
+                        extra_next_select_spaces = extra_next_select_spaces
+                    elseif extra_next_select_spaces > 0.5 then
+                        extra_next_select_spaces = 2 * extra_next_select_spaces * (1 - extra_next_select_spaces) + 0.5
+                    end
+                    temp_num = extra_next_select_spaces * (next_string_lines * 2)
+                    if temp_num <= next_string_lines then
+                        for i=0,math.floor(temp_num + 0.5) do
+                            extra_next_string = extra_next_string.." "
+                        end
+                    else
+                        for i=0,next_string_lines - (temp_num - next_string_lines) do
+                            extra_next_string = extra_next_string.." "
+                        end
+                    end
+                end
+                if extra_next_string ~= prev_extra_next_string then
+                    draw_queue = draw_queue + 1
+                end
+                prev_extra_next_string = extra_next_string
+                sleep(0)
+            end
+        end
 		--os.loadAPI("farm")
 		--os.loadAPI("AndysPrograms/Farm/farm")
-        while fgui_exit == 0 do
-            set_colors()
-			if setmenu_set == 1 then
-				init_gui = 1
-				_G.init_gui = 1
-			end
-            term.setCursorPos(1, 1) 
-            term.clear()
-            printmenu(cur_menu)
-            event, key = os.pullEvent("key")
-            onkeypress(key, cur_menu, selitem)
-			setmain_start()
-			sleep(0.01)
+        local function main_input_loop()
+            while fgui_exit == 0 do
+                if setmenu_set == 1 then
+                    init_gui = 1
+                    _G.init_gui = 1
+                end
+                -- term.setCursorPos(1, 1) 
+                -- term.clear()
+                -- printmenu(cur_menu)
+                event, key = os.pullEvent("key")
+                onkeypress(key, cur_menu, selitem)
+                setmain_start()
+                sleep(0.01)
+            end            
         end
-
+        local function draw_wait_loop()
+            while draw_queue > 0 do
+                printmenu(cur_menu)
+                sleep(0.01)
+            end
+        end
+        parallel.waitForAny(main_input_loop,fancy_extra_next_sel_curve,draw_wait_loop)
 
 
 
