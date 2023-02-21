@@ -465,7 +465,7 @@ function start_farm_gui(args)
                             -- extra_next_string = extra_next_string.." "
                         -- end
                     else
-                        upper_curve = math.floor(((next_string_lines * 2)+((next_string_lines - (temp_num - next_string_lines))) + 0.5))
+                        upper_curve = next_string_lines + math.floor((-(temp_num - next_string_lines)) + 0.5)
                         -- for i=1,math.floor(((next_string_lines * 2)+((next_string_lines - (temp_num - next_string_lines))) + 0.5)) do
                             -- extra_next_string = extra_next_string.." "
                         -- end
