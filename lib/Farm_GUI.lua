@@ -4,10 +4,7 @@ function start_farm_gui(args)
     local sel_screen_pos = 6
 	farm_prog_progress = "initgui"
     local extra_space = true
-	-- andy_farm_program_running = 0
-	-- if args[1] == "noset" then
-	-- 	andy_farm_program_running = 1
-	-- end
+
     local draw_queue = 1
     local extra_next_select_spaces = 2
     local epoch_mul = 72000
@@ -184,26 +181,12 @@ function start_farm_gui(args)
         end
 
         openset = 1
-
-
-        
-
-
         while fgui_exit == 0 do
-
-
-
-
         if fgui_exit == 0 then
             chngsel = 0
             term.clear()
             setsoffset = 1
             selitem = 1
-            --if (maxH) < (#setmenu * 2) then
-            --    selitem = maxH / 2
-        -- elseif (maxH) > (#setmenu) then
-            --selitem = 1
-            --end
 
         local function press_input()
             settingsinputtable = {}
@@ -220,9 +203,6 @@ function start_farm_gui(args)
             if i ~= nil then
                 if (type(i) == "table") then
                     return table.concat(i, ", ")
-                    -- if #tostring(prntset) / maxW > 1 then
-                    --     add_sum(#tostring(prntset) / maxW)
-                    -- end
                 else
                     return i
                 end
@@ -266,9 +246,6 @@ function start_farm_gui(args)
                     
                 end
             end
-            -- print(list[1])
-            -- print(templist[1])
-            -- print(templist[1+ amount])
             return templist
             
         end
@@ -390,7 +367,7 @@ function start_farm_gui(args)
                                 end
 
                             else
-                                add_list(">  "..prntset)
+                                add_list(">  "..extra_next_string..prntset)
                                 if #tostring(prntset) / maxW > 1 then
                                     -- add_sum(#tostring(prntset) / maxW)
                                 end
@@ -519,17 +496,7 @@ function start_farm_gui(args)
         end
         parallel.waitForAny(main_input_loop,fancy_extra_next_sel_curve,draw_wait_loop)
 
-
-
-
-
-
-
-
         end
-
-
-
         end
     end
 end
