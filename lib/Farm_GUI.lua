@@ -451,8 +451,9 @@ function start_farm_gui(args)
                 else
                     local mix_cache_eq = (((os.epoch() - (col_prev_time - trans_time)) / trans_time) - 1)
                     if extra_next_select_spaces <= 0.5 then
-                        extra_next_select_spaces = extra_next_select_spaces
+                        extra_next_select_spaces = extra_next_select_spaces + mix_cache_eq
                     elseif extra_next_select_spaces > 0.5 then
+                        extra_next_select_spaces = extra_next_select_spaces + mix_cache_eq
                         extra_next_select_spaces = 2 * extra_next_select_spaces * (1 - extra_next_select_spaces) + 0.5
                     end
                     temp_num = extra_next_select_spaces * (next_string_lines * 2)
