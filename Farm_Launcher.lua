@@ -97,9 +97,7 @@ end
 
 -- shell.run(run_update, gui_update)
 os.loadAPI(run_update)
-print("gui ud start")
 
-print("gui ud end")
 
 -- if fs.exists("AndysPrograms/api/pastebin_silent/ps") == false then
 --     fs.makeDir("AndysPrograms/api/pastebin_silent")
@@ -160,8 +158,12 @@ end
 local function update_gui_para()
     -- ud.update(gui_update)
 end
+print("gui ud start")
+
 ud.update(gui_themes_update)
 ud.update(gui_update)
+
+print("gui ud end")
 local function update_farm_api()
     ud.update(farm_update)
 end
