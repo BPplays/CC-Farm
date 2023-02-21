@@ -30,7 +30,7 @@ local dev_or_main = "main"
 if fs.exists "AndysPrograms/farm/dev_mode" then
     update_url = {"BPplays","CC-Update","dev","Update.lua","ud",tostring(load_update)}
     goto_update = {"BPplays","CC-Goto","dev","Goto.lua","gt","AndysPrograms/api"}
-    gui_themes_update = {"BPplays","CC-Farm","dev","themes/Catppuccin Mocha/cm.lua","cm","AndysPrograms/api/gui/themes/Catppuccin Mocha"}
+    gui_themes_update = {"BPplays","CC-Farm","dev","themes/Catppuccin Mocha/cm.lua","cm","AndysPrograms/api/gui/themes/Catppuccin_Mocha"}
     gui_update = {"BPplays","CC-Farm","dev","lib/Farm_GUI.lua","gui","AndysPrograms/api/gui"}
     startup_update = {"BPplays","CC-Farm","dev","lib/startup.lua","startup.lua",""}
     farm_update = {"BPplays","CC-Farm","dev","lib/Farm_lib.lua","farm","AndysPrograms/farm"}
@@ -39,7 +39,7 @@ if fs.exists "AndysPrograms/farm/dev_mode" then
 else
     update_url = {"BPplays","CC-Update","main","Update.lua","ud",tostring(load_update)}
     goto_update = {"BPplays","CC-Goto","main","Goto.lua","gt","AndysPrograms/api"}
-    gui_themes_update = {"BPplays","CC-Farm","main","themes/Catppuccin Mocha/cm.lua","cm","AndysPrograms/api/gui/themes/Catppuccin Mocha"}
+    gui_themes_update = {"BPplays","CC-Farm","main","themes/Catppuccin Mocha/cm.lua","cm","AndysPrograms/api/gui/themes/Catppuccin_Mocha"}
     gui_update = {"BPplays","CC-Farm","main","lib/Farm_GUI.lua","gui","AndysPrograms/api/gui"}
     startup_update = {"BPplays","CC-Farm","main","lib/startup.lua","startup.lua",""}
     farm_update = {"BPplays","CC-Farm","main","lib/Farm_lib.lua","farm","AndysPrograms/farm"}
@@ -161,6 +161,7 @@ end
 print("gui ud start")
 
 ud.update(gui_themes_update)
+print("theme end")
 ud.update(gui_update)
 
 print("gui ud end")
