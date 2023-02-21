@@ -15,7 +15,7 @@ function start_farm_gui(args)
     local prev_extra_next_string = ""
     local col_prev_time = os.epoch() - trans_time
     col_prev_time = col_prev_time - trans_time
-    local next_string_lines = 3
+    local next_string_lines = 2
     local upper_curve
     
     selitem = 1
