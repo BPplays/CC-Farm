@@ -11,6 +11,7 @@ function start_farm_gui(args)
     --in milisecs
     local trans_time = 4000 * epoch_mul
     local extra_next_string = ""
+    local extra_next_string_output = ""
     local prev_extra_next_string = ""
     local col_prev_time = os.epoch() - trans_time
     col_prev_time = col_prev_time - trans_time
@@ -149,7 +150,7 @@ function start_farm_gui(args)
 
 		main_menu = {}
 		main_menu = {
-			{options = "Start", handler = start_stop_farm},
+			{text = "AFarm V12", options = "Start", handler = start_stop_farm},
 			{options = "Options", handler = options_farm},
 			{options = "Exit", handler = exit}
 		}
@@ -368,7 +369,7 @@ function start_farm_gui(args)
                                 end
 
                             else
-                                add_list(">  "..extra_next_string..prntset)
+                                add_list(">  "..extra_next_string_output..prntset)
                                 if #tostring(prntset) / maxW > 1 then
                                     -- add_sum(#tostring(prntset) / maxW)
                                 end
@@ -460,7 +461,7 @@ function start_farm_gui(args)
                             extra_next_string = extra_next_string.." "
                         end
                     else
-                        for i=0,next_string_lines - (temp_num - next_string_lines) do
+                        for i=0,next_string_lines - math.floor((temp_num - next_string_lines) + 0.5) do
                             extra_next_string = extra_next_string.." "
                         end
                     end
@@ -469,6 +470,7 @@ function start_farm_gui(args)
                     draw_queue = draw_queue + 1
                 end
                 prev_extra_next_string = extra_next_string
+                extra_next_string_output = extra_next_string
                 sleep(0)
             end
         end
