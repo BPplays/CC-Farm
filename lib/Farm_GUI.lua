@@ -476,10 +476,15 @@ function start_farm_gui(args)
                         down_proc = true
                     end
                     OutQuadBlend(extra_next_select_spaces)
-                    temp_num = extra_next_select_spaces * (next_string_lines * 2)
-                    if extra_next_select_spaces > 0.4 and extra_next_select_spaces < 0.6 then
-                        temp_num = next_string_lines
+                    if extra_next_select_spaces < 0.25 then
+                        extra_next_select_spaces = extra_next_select_spaces * 2
+                    elseif extra_next_select_spaces < 0.5 then
+                        extra_next_select_spaces = 0.5
                     end
+                    temp_num = extra_next_select_spaces * (next_string_lines * 2)
+                    -- if extra_next_select_spaces > 0.4 and extra_next_select_spaces < 0.6 then
+                        -- temp_num = next_string_lines
+                    -- end
 
 
                     if down_proc == false then
