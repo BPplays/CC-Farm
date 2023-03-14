@@ -219,7 +219,10 @@ function start_farm_gui(args)
         local preped_item_list = {}
         local shifted_list = {}
         local item_list_sel = 1
-        local function shift_list(list,up_down,amount)
+        local function shift_list(list,up_down,amount,max)
+            if max == nil then
+                max = #list
+            end
             local templist = {}
             if amount == nil then
                 amount = 1
