@@ -322,6 +322,8 @@ while _G.stopfarm ~= 1 do
 
     print("start")
     start_para_lau()
+    term.clear()
+    term.setCursorPos(1,1)
     _G.stopfarm = 1
     --parallel.waitForAny(farm_gui_lau, start_farm_lau)
 end
