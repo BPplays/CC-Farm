@@ -221,6 +221,8 @@ function start_farm_gui(args)
         local preped_item_list = {}
         local shifted_list = {}
         local item_list_sel = 1
+
+        --todo add min and make it work
         local function shift_list(list,up_down,amount,max)
             if max == nil then
                 max = #list
@@ -257,8 +259,12 @@ function start_farm_gui(args)
             return templist
             
         end
+
+
         local stoplistloop = 0
         local dif = 0
+
+
         local function prep_list_for_draw(list)
             local shift_dir = ""
             preped_item_list = {}
@@ -271,6 +277,7 @@ function start_farm_gui(args)
             if #list < maxH then
                 return list
             end
+            --todo make use min and max
             shifted_list = shift_list(list,shift_dir, dif)
             -- print(shifted_list[1])
             -- print(list[1])
